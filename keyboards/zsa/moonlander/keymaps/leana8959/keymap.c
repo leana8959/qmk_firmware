@@ -16,15 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+/*
+ * Inspiration:
+ * https://github.com/ThePrimeagen/keyboards
+ */
 
 #include QMK_KEYBOARD_H
 #include "version.h"
+#include "keymap_dvorak.h"
 
 enum layers {
-    BASE,  // default layer
-    SYMB,  // symbols
-    MDIA,  // media keys
+    BASE, // default layer
+    SYMB, // symbols
 };
 
 enum custom_keycodes {
@@ -33,32 +36,46 @@ enum custom_keycodes {
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
     [BASE] = LAYOUT(
-        KC_EQL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LEFT,           KC_RGHT, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
-        KC_DEL,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    TG(SYMB),         TG(SYMB), KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
-        KC_BSPC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_HYPR,           KC_MEH,  KC_H,    KC_J,    KC_K,    KC_L,    LT(MDIA, KC_SCLN), LGUI_T(KC_QUOT),
-        KC_LSFT, LCTL_T(KC_Z),KC_X,KC_C,    KC_V,    KC_B,                                KC_N,    KC_M,    KC_COMM, KC_DOT,  RCTL_T(KC_SLSH), KC_RSFT,
-    LT(SYMB,KC_GRV),WEBUSB_PAIR,A(KC_LSFT),KC_LEFT, KC_RGHT,  LALT_T(KC_APP),    RCTL_T(KC_ESC),   KC_UP,   KC_DOWN, KC_LBRC, KC_RBRC, MO(SYMB),
-                                            KC_SPC,  KC_BSPC, KC_LGUI,           KC_LALT,  KC_TAB,  KC_ENT
+        _______,  DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     _______,
+
+        KC_CAPS,  DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
+        // TODO: make escape a hold toggle to fn keys
+        KC_ESC,   DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
+        MO(SYMB), DV_Z,    DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     MO(SYMB),
+
+        // TODO: macro to open iTerm on red button on the right hand
+        // TODO: macro to screenshot on red button on the left hand
+        KC_APP,   MO(SYMB),KC_LCTL, KC_LOPT, KC_LCMD,         _______,           _______,            KC_RCMD, KC_ROPT, KC_RBRC, MO(SYMB), _______,
+                                             KC_SPC,  KC_TAB, DV_DLR,            DV_GRV,    KC_ENT,  KC_BSPC
     ),
+
 
     [SYMB] = LAYOUT(
-        VRSN,    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,           _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-        _______, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE, _______,           _______, KC_UP,   KC_7,    KC_8,    KC_9,    KC_ASTR, KC_F12,
-        _______, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,  _______,           _______, KC_DOWN, KC_4,    KC_5,    KC_6,    KC_PLUS, _______,
-        _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD,                             KC_AMPR, KC_1,    KC_2,    KC_3,    KC_BSLS, _______,
-        EE_CLR,  _______, _______, _______, _______,          RGB_VAI,           RGB_TOG,          _______, KC_DOT,  KC_0,    KC_EQL,  _______,
-                                            RGB_HUD, RGB_VAD, RGB_HUI, TOGGLE_LAYER_COLOR,_______, _______
+        // Hijack shift behaviour for the number row
+        _______,  DV_EXLM,    DV_LBRC,    DV_LPRN,    DV_LBRC,    DV_PIPE,    _______,          _______,   DV_AMPR,    DV_RBRC,    DV_RPRN,    DV_RBRC,    _______,     _______,
+        // Shift alphabets normally
+        _______,  S(DV_QUOT), S(DV_COMM), S(DV_DOT),  S(DV_P),    S(DV_Y),    _______,          _______,   S(DV_F),    S(DV_G),    S(DV_C),    S(DV_R),    S(DV_L),     S(DV_SLSH),
+        _______,  S(DV_A),    S(DV_O),    S(DV_E),    S(DV_U),    S(DV_I),    DV_ASTR,          DV_HASH,   S(DV_D),    S(DV_H),    S(DV_T),    S(DV_N),    S(DV_S),     S(DV_MINS),
+        _______,  S(DV_Z),    S(DV_Q),    S(DV_J),    S(DV_K),    S(DV_X),                                 S(DV_B),    S(DV_M),    S(DV_W),    S(DV_V),    S(DV_Z),     _______,
+        _______,  _______,    _______,    _______,    _______,                _______,          _______,               _______,    _______,    _______,    _______,     _______,
+                                                      _______,    _______,    DV_AT,            DV_TILD,   _______,    _______
     ),
 
-    [MDIA] = LAYOUT(
-        LED_LEVEL,_______,_______, _______, _______, _______, _______,           _______, _______, _______, _______, _______, _______, QK_BOOT,
-        _______, _______, _______, KC_MS_U, _______, _______, _______,           _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______,           _______, _______, _______, _______, _______, _______, KC_MPLY,
-        _______, _______, _______, _______, _______, _______,                             _______, _______, KC_MPRV, KC_MNXT, _______, _______,
-        _______, _______, _______, KC_BTN1, KC_BTN2,         _______,            _______,          KC_VOLU, KC_VOLD, KC_MUTE, _______, _______,
-                                            _______, _______, _______,           _______, _______, _______
+    // TODO: add qwerty translation layer
+
+    /*
+    [BLANK] = LAYOUT(
+        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
+                                             _______, _______, _______,          _______,  _______, _______
     ),
+    */
+
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
