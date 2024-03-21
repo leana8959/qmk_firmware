@@ -28,6 +28,8 @@
 enum layers {
     BASE, // default layer
     SYMB, // symbols
+    MUS,  // music control
+    FN    // function keys
 };
 
 enum custom_keycodes {
@@ -41,29 +43,49 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     _______,
 
         KC_CAPS,  DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
-        // TODO: make escape a hold toggle to fn keys
-        KC_ESC,   DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
+        LT(MUS, KC_ESC),   DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
         MO(SYMB), DV_Z,    DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     MO(SYMB),
 
         // TODO: macro to open iTerm on red button on the right hand
         // TODO: macro to screenshot on red button on the left hand
-        KC_APP,   MO(SYMB),KC_LCTL, KC_LOPT, KC_LCMD,         _______,           _______,            KC_RCMD, KC_ROPT, KC_RBRC, MO(SYMB), _______,
+        KC_APP,   MO(SYMB),KC_LCTL, MT(KC_LOPT, KC_UP), MT(KC_LCMD, KC_DOWN),         _______,           _______,            MT(KC_RCMD, KC_LEFT), MT(KC_ROPT, KC_RIGHT), KC_RCTL, MO(SYMB), _______,
                                              KC_SPC,  KC_TAB, DV_DLR,            DV_GRV,    KC_ENT,  KC_BSPC
     ),
 
 
     [SYMB] = LAYOUT(
         // Hijack shift behaviour for the number row
-        _______,  DV_EXLM,    DV_LBRC,    DV_LPRN,    DV_LBRC,    DV_PIPE,    _______,          _______,   DV_AMPR,    DV_RBRC,    DV_RPRN,    DV_RBRC,    _______,     _______,
+        _______,  DV_EXLM,    DV_LBRC,    DV_LPRN,    DV_LBRC,    DV_PIPE,    _______,          _______,   DV_AMPR,    DV_RBRC,    DV_RPRN,    DV_RBRC,    TG(FN),     _______,
         // Shift alphabets normally
-        _______,  S(DV_QUOT), S(DV_COMM), S(DV_DOT),  S(DV_P),    S(DV_Y),    _______,          _______,   S(DV_F),    S(DV_G),    S(DV_C),    S(DV_R),    S(DV_L),     S(DV_SLSH),
-        _______,  S(DV_A),    S(DV_O),    S(DV_E),    S(DV_U),    S(DV_I),    DV_ASTR,          DV_HASH,   S(DV_D),    S(DV_H),    S(DV_T),    S(DV_N),    S(DV_S),     S(DV_MINS),
+        _______,  S(DV_QUOT), S(DV_COMM), S(DV_DOT),  S(DV_P),    S(DV_Y),    _______,          _______,   S(DV_F),    S(DV_G),    S(DV_C),    S(DV_R),    S(DV_L),     DV_QUES,
+        _______,  S(DV_A),    S(DV_O),    S(DV_E),    S(DV_U),    S(DV_I),    DV_ASTR,          DV_HASH,   S(DV_D),    S(DV_H),    S(DV_T),    S(DV_N),    S(DV_S),     DV_UNDS,
         _______,  S(DV_Z),    S(DV_Q),    S(DV_J),    S(DV_K),    S(DV_X),                                 S(DV_B),    S(DV_M),    S(DV_W),    S(DV_V),    S(DV_Z),     _______,
         _______,  _______,    _______,    _______,    _______,                _______,          _______,               _______,    _______,    _______,    _______,     _______,
                                                       _______,    _______,    DV_AT,            DV_TILD,   _______,    _______
     ),
 
+    [FN] = LAYOUT(
+        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______,  KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
+        _______,  _______, _______, _______, _______, KC_F6,   _______,          _______,  KC_F7,   _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
+                                             _______, _______, _______,          _______,  _______, _______
+    ),
+
+
+    [MUS] = LAYOUT(
+        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, KC_MEDIA_PREV_TRACK, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_NEXT_TRACK, _______, _______,
+        _______,  _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
+                                             _______, _______, _______,          _______,  _______, _______
+    ),
+
+
     // TODO: add qwerty translation layer
+    // TODO: learn more about DF
 
     /*
     [BLANK] = LAYOUT(
