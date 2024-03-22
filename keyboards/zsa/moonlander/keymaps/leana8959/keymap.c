@@ -86,7 +86,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
   &ko_make_with_layers(MOD_MASK_SHIFT, DV_7, DV_RCBR, 1 << L_BASE),
   &ko_make_with_layers(MOD_MASK_SHIFT, DV_8, DV_RPRN, 1 << L_BASE),
   &ko_make_with_layers(MOD_MASK_SHIFT, DV_9, DV_RBRC, 1 << L_BASE),
-  // &ko_make_basic(MOD_MASK_SHIFT, DV_0, TG(L_FUNC)),  // FIXME: can I use TG here ?
 
   &ko_make_with_layers(MOD_MASK_SHIFT, KC_BRID, DV_PIPE, 1 << L_BASE),
   &ko_make_with_layers(MOD_MASK_SHIFT, DV_PLUS, DV_ASTR, 1 << L_BASE),
@@ -95,7 +94,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
   &ko_make_with_layers(MOD_MASK_SHIFT, DV_DLR, DV_AT, 1 << L_BASE),
 
   // Backspace
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_BSPC, KC_DEL, 1 << L_BASE),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_BSPC, KC_DEL, 1 << L_BASE, MOD_MASK_CAG),
 
   /******************************/
   /* Override for native dvovak */
@@ -111,7 +110,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
   &ko_make_with_layers(MOD_MASK_SHIFT, KC_7, KC_RCBR, 1 << L_NATV),
   &ko_make_with_layers(MOD_MASK_SHIFT, KC_8, KC_RPRN, 1 << L_NATV),
   &ko_make_with_layers(MOD_MASK_SHIFT, KC_9, KC_RBRC, 1 << L_NATV),
-  // &ko_make_basic(MOD_MASK_SHIFT, KC_0, TG(L_FUNC)),  // FIXME:
 
   &ko_make_with_layers(MOD_MASK_SHIFT, KC_BRID, KC_PIPE, 1 << L_NATV),
   &ko_make_with_layers(MOD_MASK_SHIFT, KC_PLUS, KC_ASTR, 1 << L_NATV),
@@ -120,9 +118,13 @@ const key_override_t **key_overrides = (const key_override_t *[]){
   &ko_make_with_layers(MOD_MASK_SHIFT, KC_DLR, KC_AT, 1 << L_NATV),
 
   // Backspace
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_BSPC, KC_DEL, 1 << L_NATV),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_BSPC, KC_DEL, 1 << L_NATV, MOD_MASK_CAG),
 
-  // NOTE: I can probably refactor this, but I'll leave it as is for the time being
+  /******************/
+  /* Layer agnostic */
+  /******************/
+  // &ko_make_basic(MOD_MASK_SHIFT, KC_0, TG(L_FUNC)),  // FIXME:
+
   // Ending NULL
   NULL
 };
