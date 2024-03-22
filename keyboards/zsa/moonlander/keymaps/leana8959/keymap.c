@@ -32,7 +32,8 @@ enum layers {
 };
 
 enum custom_keycodes {
-    VRSN = SAFE_RANGE,
+    CKC_SCROT_CLIP = SAFE_RANGE, // screenshot to clipboard
+    CKC_SCROT,                   // screenshot
 };
 
 // clang-format off
@@ -46,8 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,  DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     KC_RSFT,
 
         // TODO: macro to open iTerm on red button on the right hand
-        // TODO: macro to screenshot on red button on the left hand
-        KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         _______,           _______,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, _______,
+        KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         CKC_SCROT_CLIP,           _______,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, _______,
                                              KC_SPC,  KC_TAB, DV_DLR,            DV_GRV,    KC_ENT,  KC_BSPC
     ),
 
@@ -93,8 +93,20 @@ const key_override_t **key_overrides = (const key_override_t *[]){// Symbol row 
 
                                                                   &ko_make_basic(MOD_MASK_SHIFT, KC_BRID, DV_PIPE),
                                                                   &ko_make_basic(MOD_MASK_SHIFT, DV_PLUS, DV_ASTR),
-
                                                                   &ko_make_basic(MOD_MASK_SHIFT, KC_VOLD, DV_AMPR),
                                                                   &ko_make_basic(MOD_MASK_SHIFT, DV_EQL, DV_HASH),
 
                                                                   NULL};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CKC_SCROT_CLIP:
+            if (record->event.pressed) {
+                tap_code16(LGUI(LSFT(KC_4)));
+            } else {
+            }
+            return false;
+        default:
+            return true;
+    }
+}
