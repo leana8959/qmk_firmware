@@ -26,9 +26,10 @@
 #include "process_key_override.h"
 
 enum layers {
-  BASE,  // default layer
-  MUS,   // music control
-  FN     // function keys
+  L_DVORAK,  // dvorak on qwerty codes
+  L_QWERTY,  // native dvorak
+  L_MUSIC,   // music control
+  L_FUNC     // function keys
 };
 
 enum custom_keycodes {
@@ -36,23 +37,42 @@ enum custom_keycodes {
   CKC_SCROT,                    // screenshot
 };
 
+// TODO: macro to open iTerm on red button on the right hand
+// TODO: add qwerty translation layer
+// TODO: learn more about DF
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    [BASE] = LAYOUT(
+    [L_DVORAK] = LAYOUT(
         _______,  DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     _______,
-
         KC_CAPS,  DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
         KC_ESC,   DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
         KC_LSFT,  DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     KC_RSFT,
-
-        // TODO: macro to open iTerm on red button on the right hand
-        KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         CKC_SCROT_CLIP,           DV_BSLS,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, _______,
+        KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         CKC_SCROT_CLIP,           DV_BSLS,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, DF(L_QWERTY),
                                              KC_SPC,  KC_TAB, DV_DLR,            DV_GRV,    KC_ENT,  KC_BSPC
     ),
 
+    // TODO: per-layer lighting
+    [L_QWERTY] = LAYOUT(
+        _______,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_BRIU,          KC_VOLU,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     _______,
+        KC_CAPS,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_BRID,          KC_VOLD,   KC_F,    KC_G,    KC_C,    KC_R,    KC_L,     KC_SLSH,
+        KC_ESC,   KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_PLUS,          KC_EQL,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,     KC_MINS,
+        KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                                 KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,     KC_RSFT,
+        KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         CKC_SCROT_CLIP,           KC_BSLS,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, DF(L_DVORAK),
+                                             KC_SPC,  KC_TAB, KC_DLR,            KC_GRV,    KC_ENT,  KC_BSPC
+    ),
 
-    [FN] = LAYOUT(
+    // [L_QWERTY] = LAYOUT(
+    //     _______,  DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     _______,
+    //     KC_CAPS,  DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
+    //     KC_ESC,   DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
+    //     KC_LSFT,  DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     KC_RSFT,
+    //     KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         CKC_SCROT_CLIP,           DV_BSLS,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, CKC_TO_QWERTY,
+    //                                          KC_SPC,  KC_TAB, DV_DLR,            DV_GRV,    KC_ENT,  KC_BSPC
+    // ),
+
+
+    [L_FUNC] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______,  KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
         _______,  _______, _______, _______, _______, KC_F6,   _______,          _______,  KC_F7,   _______, _______, _______, _______, _______,
@@ -62,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 
-    [MUS] = LAYOUT(
+    [L_MUSIC] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, KC_MEDIA_PREV_TRACK, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_NEXT_TRACK, _______, _______,
@@ -72,8 +92,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
 
-    // TODO: add qwerty translation layer
-    // TODO: learn more about DF
 
 };
 // clang-format on
@@ -86,7 +104,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 
   &ko_make_basic(MOD_MASK_SHIFT, DV_6, DV_CIRC), &ko_make_basic(MOD_MASK_SHIFT, DV_7, DV_RCBR),
   &ko_make_basic(MOD_MASK_SHIFT, DV_8, DV_RPRN), &ko_make_basic(MOD_MASK_SHIFT, DV_9, DV_RBRC),
-  &ko_make_basic(MOD_MASK_SHIFT, DV_0, TG(FN)),
+  &ko_make_basic(MOD_MASK_SHIFT, DV_0, TG(L_FUNC)),  // FIXME:
 
   &ko_make_basic(MOD_MASK_SHIFT, KC_BRID, DV_PIPE),
   &ko_make_basic(MOD_MASK_SHIFT, DV_PLUS, DV_ASTR),
