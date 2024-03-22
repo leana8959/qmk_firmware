@@ -22,13 +22,11 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "version.h"
-#include "modifiers.h"
 #include "keymap_dvorak.h"
+#include "process_key_override.h"
 
 enum layers {
     BASE, // default layer
-    SYMB, // symbols
     MUS,  // music control
     FN    // function keys
 };
@@ -44,26 +42,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     _______,
 
         KC_CAPS,  DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
-        LT(MUS, KC_ESC),   DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
-        MO(SYMB), DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     MO(SYMB),
+        KC_ESC,   DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
+        KC_LSFT,  DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     KC_RSFT,
 
         // TODO: macro to open iTerm on red button on the right hand
         // TODO: macro to screenshot on red button on the left hand
-        KC_APP,   MO(SYMB), KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         _______,           _______,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, MO(SYMB), _______,
+        KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         _______,           _______,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, _______,
                                              KC_SPC,  KC_TAB, DV_DLR,            DV_GRV,    KC_ENT,  KC_BSPC
     ),
 
-
-    [SYMB] = LAYOUT(
-        // Hijack shift behaviour for the number row
-        _______,  DV_EXLM,    DV_LBRC,    DV_LPRN,    DV_LBRC,    DV_PERC,    _______,          _______,   DV_CIRC,    DV_RBRC,    DV_RPRN,    DV_RBRC,    TG(FN),     _______,
-        // Shift alphabets normally
-        _______,  S(DV_QUOT), S(DV_COMM), S(DV_DOT),  S(DV_P),    S(DV_Y),    DV_PIPE,          DV_AMPR,   S(DV_F),    S(DV_G),    S(DV_C),    S(DV_R),    S(DV_L),     DV_QUES,
-        _______,  S(DV_A),    S(DV_O),    S(DV_E),    S(DV_U),    S(DV_I),    DV_ASTR,          DV_HASH,   S(DV_D),    S(DV_H),    S(DV_T),    S(DV_N),    S(DV_S),     DV_UNDS,
-        _______,  DV_COLN,    S(DV_Q),    S(DV_J),    S(DV_K),    S(DV_X),                                 S(DV_B),    S(DV_M),    S(DV_W),    S(DV_V),    S(DV_Z),     _______,
-        S(KC_APP),_______,    _______,    _______,    _______,                _______,          _______,               _______,    _______,    _______,    _______,     _______,
-                                                      _______,    S(KC_TAB),  DV_AT,            DV_TILD,   S(KC_ENT),  _______
-    ),
 
     [FN] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
@@ -88,26 +75,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // TODO: add qwerty translation layer
     // TODO: learn more about DF
 
-    /*
-    [BLANK] = LAYOUT(
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
-                                             _______, _______, _______,          _______,  _______, _______
-    ),
-    */
-
 };
+// clang-format on
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        switch (keycode) {
-        case VRSN:
-            SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
-            return false;
-        }
-    }
-    return true;
-}
+const key_override_t **key_overrides = (const key_override_t *[]){// Symbol row override
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, DV_1, DV_EXLM),
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, DV_2, DV_LBRC),
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, DV_3, DV_LPRN),
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, DV_4, DV_LCBR),
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, DV_5, DV_PERC),
+
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, DV_6, DV_CIRC),
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, DV_7, DV_RCBR),
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, DV_8, DV_RPRN),
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, DV_9, DV_RBRC),
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, DV_0, TG(FN)),
+
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, KC_BRID, DV_PIPE),
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, DV_PLUS, DV_ASTR),
+
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, KC_VOLD, DV_AMPR),
+                                                                  &ko_make_basic(MOD_MASK_SHIFT, DV_EQL, DV_HASH),
+
+                                                                  NULL};
