@@ -28,7 +28,6 @@
 enum layers {
   L_BASE,  // dvorak on qwerty codes
   L_NATV,  // native dvorak
-  L_MUSC,  // music control
   L_FUNC   // function keys
 };
 
@@ -41,7 +40,7 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // TODO: macro to open iTerm on red button on the right hand
     [L_BASE] = LAYOUT(
-        _______,  DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     _______,
+        OSL(L_FUNC),  DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     _______,
         KC_CAPS,  DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
         KC_ESC,   DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
         KC_LSFT,  DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     KC_RSFT,
@@ -62,21 +61,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [L_FUNC] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______,  KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
-        _______,  _______, _______, _______, _______, KC_F6,   _______,          _______,  KC_F7,   _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, _______, KC_F6,   _______,          _______,  KC_F7,   KC_MEDIA_PREV_TRACK, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_NEXT_TRACK, _______, _______,
         _______,  _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
                                              _______, _______, _______,          _______,  _______, _______
     ),
 
-
-    [L_MUSC] = LAYOUT(
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, KC_MEDIA_PREV_TRACK, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_NEXT_TRACK, _______, _______,
-        _______,  _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
-                                             _______, _______, _______,          _______,  _______, _______
-    ),
 
 };
 // clang-format on
