@@ -40,7 +40,7 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [BASE] = LAYOUT(
-        DV_DLR,   DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     DV_AT,
+        _______,  DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     _______,
 
         KC_CAPS,  DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
         KC_ESC,   DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
         // TODO: macro to open iTerm on red button on the right hand
         KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         CKC_SCROT_CLIP,           DV_BSLS,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, _______,
-                                             KC_SPC,  KC_TAB, _______,            DV_GRV,    KC_ENT,  KC_BSPC
+                                             KC_SPC,  KC_TAB, DV_DLR,            DV_GRV,    KC_ENT,  KC_BSPC
     ),
 
 
@@ -90,7 +90,10 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 
   &ko_make_basic(MOD_MASK_SHIFT, KC_BRID, DV_PIPE),
   &ko_make_basic(MOD_MASK_SHIFT, DV_PLUS, DV_ASTR),
+
   &ko_make_basic(MOD_MASK_SHIFT, KC_VOLD, DV_AMPR), &ko_make_basic(MOD_MASK_SHIFT, DV_EQL, DV_HASH),
+
+  &ko_make_basic(MOD_MASK_SHIFT, DV_DLR, DV_AT),
 
   // Backspace
   &ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL), NULL
