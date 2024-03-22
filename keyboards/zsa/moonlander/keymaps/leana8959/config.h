@@ -68,3 +68,8 @@
 #undef ENABLE_RGB_MATRIX_MULTISPLASH
 #undef ENABLE_RGB_MATRIX_SOLID_SPLASH
 #undef ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
+
+#ifdef AUDIO_ENABLE
+#    define AUDIO_INIT_DELAY // https://github.com/qmk/qmk_firmware/issues/14242
+#    define STARTUP_SONG SONG(H__NOTE(_E5), H__NOTE(_FS5), H__NOTE(_G5), H__NOTE(_A5), W__NOTE(_FS5), H__NOTE(_D5), W__NOTE(_E5))
+#endif
