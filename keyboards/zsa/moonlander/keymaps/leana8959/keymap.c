@@ -30,11 +30,6 @@ enum layers {
   L_FUNC   // function keys
 };
 
-enum custom_keycodes {
-  CKC_SCROT_CLIP = SAFE_RANGE,  // screenshot to clipboard
-  CKC_SCROT,                    // screenshot
-};
-
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // TODO: macro to open iTerm on red button on the right hand
@@ -43,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_CAPS,  DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
         KC_ESC,   DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
         KC_LSFT,  DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     KC_RSFT,
-        KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         CKC_SCROT_CLIP,           DV_BSLS,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, DF(L_NATV),
+        KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         LGUI(S(KC_4)),           DV_BSLS,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, DF(L_NATV),
                                              KC_SPC,  KC_TAB, DV_DLR,            DV_GRV,    KC_ENT,  KC_BSPC
     ),
 
@@ -52,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_CAPS,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_BRID,          KC_VOLD,   KC_F,    KC_G,    KC_C,    KC_R,    KC_L,     KC_SLSH,
         KC_ESC,   KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_PLUS,          KC_EQL,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,     KC_MINS,
         KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                                 KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,     KC_RSFT,
-        KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         CKC_SCROT_CLIP,           KC_BSLS,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, DF(L_BASE),
+        KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         XXXXXXX,           KC_BSLS,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, DF(L_BASE),
                                              KC_SPC,  KC_TAB, KC_DLR,            KC_GRV,    KC_ENT,  KC_BSPC
     ),
 
@@ -133,14 +128,6 @@ float native_disable_sound[][2] = SONG(QWERTY_SOUND);
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
-  case CKC_SCROT_CLIP:
-    // TODO: send this keycode directly ?
-    if (record->event.pressed) {
-      tap_code16(LGUI(LSFT(KC_4)));
-    } else {
-    }
-    return false;
-
   case DF(L_BASE):
     if (record->event.pressed)
       PLAY_SONG(native_disable_sound);
