@@ -23,7 +23,6 @@
 
 #include QMK_KEYBOARD_H
 #include "keymap_dvorak.h"
-#include "process_key_override.h"
 
 enum layers {
   L_BASE,  // dvorak on qwerty codes
@@ -48,7 +47,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                              KC_SPC,  KC_TAB, DV_DLR,            DV_GRV,    KC_ENT,  KC_BSPC
     ),
 
-    // TODO: per-layer lighting
     [L_NATV] = LAYOUT(
         _______,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_BRIU,          KC_VOLU,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     _______,
         KC_CAPS,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_BRID,          KC_VOLD,   KC_F,    KC_G,    KC_C,    KC_R,    KC_L,     KC_SLSH,
@@ -141,4 +139,56 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
   default:
     return true;
   }
+}
+
+const uint8_t PROGMEM color_cyan[3] = { 15, 208, 255 };
+const uint8_t PROGMEM color_white[3] = { 255, 255, 255 };
+const uint8_t PROGMEM color_purple[3] = { 168, 16, 255 };
+
+void set_fn_colors(void)
+{
+  // function keys
+  rgb_matrix_set_color(6, color_cyan[0], color_cyan[1], color_cyan[2]);
+  rgb_matrix_set_color(11, color_cyan[0], color_cyan[1], color_cyan[2]);
+  rgb_matrix_set_color(16, color_cyan[0], color_cyan[1], color_cyan[2]);
+  rgb_matrix_set_color(21, color_cyan[0], color_cyan[1], color_cyan[2]);
+  rgb_matrix_set_color(26, color_cyan[0], color_cyan[1], color_cyan[2]);
+  rgb_matrix_set_color(27, color_cyan[0], color_cyan[1], color_cyan[2]);
+
+  rgb_matrix_set_color(42, color_cyan[0], color_cyan[1], color_cyan[2]);
+  rgb_matrix_set_color(47, color_cyan[0], color_cyan[1], color_cyan[2]);
+  rgb_matrix_set_color(52, color_cyan[0], color_cyan[1], color_cyan[2]);
+  rgb_matrix_set_color(57, color_cyan[0], color_cyan[1], color_cyan[2]);
+  rgb_matrix_set_color(62, color_cyan[0], color_cyan[1], color_cyan[2]);
+  rgb_matrix_set_color(63, color_cyan[0], color_cyan[1], color_cyan[2]);
+
+  // music keys
+  rgb_matrix_set_color(48, color_white[0], color_white[1], color_white[2]);
+  rgb_matrix_set_color(53, color_white[0], color_white[1], color_white[2]);
+  rgb_matrix_set_color(58, color_white[0], color_white[1], color_white[2]);
+
+  // go back?
+  rgb_matrix_set_color(0, color_purple[0], color_purple[1], color_purple[2]);
+}
+
+void set_natv_colors(void)
+{
+  // go back?
+  rgb_matrix_set_color(40, color_purple[0], color_purple[1], color_purple[2]);
+}
+
+// TODO: where do I inject layer switching sounds ?
+bool rgb_matrix_indicators_user(void)
+{
+  switch (get_highest_layer(default_layer_state | layer_state)) {
+  case L_FUNC:
+    set_fn_colors();
+    break;
+  case L_NATV:
+    set_natv_colors();
+    break;
+  default:
+    break;
+  }
+  return true;
 }
