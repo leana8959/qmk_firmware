@@ -86,9 +86,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
   &ko_make_with_layers(MOD_MASK_SHIFT, DV_EQL, DV_HASH, 1 << L_BASE),
   &ko_make_with_layers(MOD_MASK_SHIFT, DV_DLR, DV_AT, 1 << L_BASE),
 
-  // Backspace
-  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_BSPC, KC_DEL, 1 << L_BASE, MOD_MASK_CAG),
-
   /******************************/
   /* Override for native dvovak */
   /******************************/
@@ -110,12 +107,12 @@ const key_override_t **key_overrides = (const key_override_t *[]){
   &ko_make_with_layers(MOD_MASK_SHIFT, KC_EQL, KC_HASH, 1 << L_NATV),
   &ko_make_with_layers(MOD_MASK_SHIFT, KC_DLR, KC_AT, 1 << L_NATV),
 
-  // Backspace
-  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_BSPC, KC_DEL, 1 << L_NATV, MOD_MASK_CAG),
-
   /******************/
   /* Layer agnostic */
   /******************/
+  // Backspace
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_BSPC, KC_DEL, ~0, MOD_MASK_CAG),
+
   // &ko_make_basic(MOD_MASK_SHIFT, KC_0, TG(L_FUNC)),  // FIXME:
 
   // Ending NULL
@@ -130,43 +127,54 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
   }
 }
 
-const uint8_t PROGMEM color_cyan[3] = { 15, 208, 255 };
-const uint8_t PROGMEM color_white[3] = { 255, 255, 255 };
-const uint8_t PROGMEM color_purple[3] = { 168, 16, 255 };
-
 void set_fn_colors(void)
 {
-  // function keys
-  rgb_matrix_set_color(6, color_cyan[0], color_cyan[1], color_cyan[2]);
-  rgb_matrix_set_color(11, color_cyan[0], color_cyan[1], color_cyan[2]);
-  rgb_matrix_set_color(16, color_cyan[0], color_cyan[1], color_cyan[2]);
-  rgb_matrix_set_color(21, color_cyan[0], color_cyan[1], color_cyan[2]);
-  rgb_matrix_set_color(26, color_cyan[0], color_cyan[1], color_cyan[2]);
-  rgb_matrix_set_color(27, color_cyan[0], color_cyan[1], color_cyan[2]);
+  // Loop over all LEDs to disable not specified ones
+  for (uint8_t i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
+    switch (i) {
+    // function keys
+    // lh
+    case 6:
+    case 11:
+    case 16:
+    case 21:
+    case 26:
+    case 27:
+    // rh
+    case 42:
+    case 47:
+    case 52:
+    case 57:
+    case 62:
+    case 63:
+      rgb_matrix_set_color(i, 15, 208, 255);  // cyan
+      break;
 
-  rgb_matrix_set_color(42, color_cyan[0], color_cyan[1], color_cyan[2]);
-  rgb_matrix_set_color(47, color_cyan[0], color_cyan[1], color_cyan[2]);
-  rgb_matrix_set_color(52, color_cyan[0], color_cyan[1], color_cyan[2]);
-  rgb_matrix_set_color(57, color_cyan[0], color_cyan[1], color_cyan[2]);
-  rgb_matrix_set_color(62, color_cyan[0], color_cyan[1], color_cyan[2]);
-  rgb_matrix_set_color(63, color_cyan[0], color_cyan[1], color_cyan[2]);
+    // music keys
+    case 48:
+    case 53:
+    case 58:
+      rgb_matrix_set_color(i, 255, 255, 255);
+      break;
 
-  // music keys
-  rgb_matrix_set_color(48, color_white[0], color_white[1], color_white[2]);
-  rgb_matrix_set_color(53, color_white[0], color_white[1], color_white[2]);
-  rgb_matrix_set_color(58, color_white[0], color_white[1], color_white[2]);
+    // go back?
+    case 0:
+      rgb_matrix_set_color(i, 168, 16, 255);  // purple
+      break;
 
-  // go back?
-  rgb_matrix_set_color(0, color_purple[0], color_purple[1], color_purple[2]);
+    default:
+      rgb_matrix_set_color(i, 0, 0, 0);
+      break;
+    }
+  }
 }
 
 void set_natv_colors(void)
 {
   // go back?
-  rgb_matrix_set_color(40, color_purple[0], color_purple[1], color_purple[2]);
+  rgb_matrix_set_color(40, 168, 16, 255);  // purple
 }
 
-// TODO: where do I inject layer switching sounds ?
 bool rgb_matrix_indicators_user(void)
 {
   switch (get_highest_layer(default_layer_state | layer_state)) {
@@ -175,8 +183,6 @@ bool rgb_matrix_indicators_user(void)
     break;
   case L_NATV:
     set_natv_colors();
-    break;
-  default:
     break;
   }
   return true;
