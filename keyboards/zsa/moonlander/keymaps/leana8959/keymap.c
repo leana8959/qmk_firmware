@@ -119,14 +119,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
   NULL
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record)
-{
-  switch (keycode) {
-  default:
-    return true;
-  }
-}
-
 void set_fn_colors(void)
 {
   // Loop over all LEDs to disable not specified ones
