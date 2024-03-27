@@ -122,21 +122,9 @@ const key_override_t **key_overrides = (const key_override_t *[]){
   NULL
 };
 
-float native_enable_sound[][2] = SONG(DVORAK_SOUND);
-float native_disable_sound[][2] = SONG(QWERTY_SOUND);
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
-  case DF(L_BASE):
-    if (record->event.pressed)
-      PLAY_SONG(native_disable_sound);
-    return true;
-  case DF(L_NATV):
-    if (record->event.pressed)
-      PLAY_SONG(native_enable_sound);
-    return true;
-
   default:
     return true;
   }
