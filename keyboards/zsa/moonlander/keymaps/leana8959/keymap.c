@@ -69,43 +69,45 @@ const key_override_t **key_overrides = (const key_override_t *[]){
   /* Override for dvorak */
   /***********************/
   // Symbol row override
-  &ko_make_with_layers(MOD_MASK_SHIFT, DV_1, DV_EXLM, 1 << L_BASE),
-  &ko_make_with_layers(MOD_MASK_SHIFT, DV_2, DV_LBRC, 1 << L_BASE),
-  &ko_make_with_layers(MOD_MASK_SHIFT, DV_3, DV_LPRN, 1 << L_BASE),
-  &ko_make_with_layers(MOD_MASK_SHIFT, DV_4, DV_LCBR, 1 << L_BASE),
-  &ko_make_with_layers(MOD_MASK_SHIFT, DV_5, DV_PERC, 1 << L_BASE),
+  // NOTE: mask [c]trl [a]lt [g]ui so the symbol row override doesn't affect other stuff
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, DV_1, DV_EXLM, 1 << L_BASE, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, DV_2, DV_LBRC, 1 << L_BASE, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, DV_3, DV_LPRN, 1 << L_BASE, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, DV_4, DV_LCBR, 1 << L_BASE, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, DV_5, DV_PERC, 1 << L_BASE, MOD_MASK_CAG),
 
-  &ko_make_with_layers(MOD_MASK_SHIFT, DV_6, DV_CIRC, 1 << L_BASE),
-  &ko_make_with_layers(MOD_MASK_SHIFT, DV_7, DV_RCBR, 1 << L_BASE),
-  &ko_make_with_layers(MOD_MASK_SHIFT, DV_8, DV_RPRN, 1 << L_BASE),
-  &ko_make_with_layers(MOD_MASK_SHIFT, DV_9, DV_RBRC, 1 << L_BASE),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, DV_6, DV_CIRC, 1 << L_BASE, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, DV_7, DV_RCBR, 1 << L_BASE, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, DV_8, DV_RPRN, 1 << L_BASE, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, DV_9, DV_RBRC, 1 << L_BASE, MOD_MASK_CAG),
 
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_BRID, DV_PIPE, 1 << L_BASE),
-  &ko_make_with_layers(MOD_MASK_SHIFT, DV_PLUS, DV_ASTR, 1 << L_BASE),
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_VOLD, DV_AMPR, 1 << L_BASE),
-  &ko_make_with_layers(MOD_MASK_SHIFT, DV_EQL, DV_HASH, 1 << L_BASE),
-  &ko_make_with_layers(MOD_MASK_SHIFT, DV_DLR, DV_AT, 1 << L_BASE),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_BRID, DV_PIPE, 1 << L_BASE, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, DV_PLUS, DV_ASTR, 1 << L_BASE, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_VOLD, DV_AMPR, 1 << L_BASE, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, DV_EQL, DV_HASH, 1 << L_BASE, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, DV_DLR, DV_AT, 1 << L_BASE, MOD_MASK_CAG),
 
   /******************************/
   /* Override for native dvovak */
   /******************************/
   // Symbol row override
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_1, KC_EXLM, 1 << L_NATV),
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_2, KC_LBRC, 1 << L_NATV),
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_3, KC_LPRN, 1 << L_NATV),
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_4, KC_LCBR, 1 << L_NATV),
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_5, KC_PERC, 1 << L_NATV),
+  // NOTE: mask [c]trl [a]lt [g]ui so the symbol row override doesn't affect other stuff
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_1, KC_EXLM, 1 << L_NATV, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_2, KC_LBRC, 1 << L_NATV, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_3, KC_LPRN, 1 << L_NATV, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_4, KC_LCBR, 1 << L_NATV, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_5, KC_PERC, 1 << L_NATV, MOD_MASK_CAG),
 
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_6, KC_CIRC, 1 << L_NATV),
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_7, KC_RCBR, 1 << L_NATV),
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_8, KC_RPRN, 1 << L_NATV),
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_9, KC_RBRC, 1 << L_NATV),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_6, KC_CIRC, 1 << L_NATV, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_7, KC_RCBR, 1 << L_NATV, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_8, KC_RPRN, 1 << L_NATV, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_9, KC_RBRC, 1 << L_NATV, MOD_MASK_CAG),
 
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_BRID, KC_PIPE, 1 << L_NATV),
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_PLUS, KC_ASTR, 1 << L_NATV),
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_VOLD, KC_AMPR, 1 << L_NATV),
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_EQL, KC_HASH, 1 << L_NATV),
-  &ko_make_with_layers(MOD_MASK_SHIFT, KC_DLR, KC_AT, 1 << L_NATV),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_BRID, KC_PIPE, 1 << L_NATV, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_PLUS, KC_ASTR, 1 << L_NATV, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_VOLD, KC_AMPR, 1 << L_NATV, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_EQL, KC_HASH, 1 << L_NATV, MOD_MASK_CAG),
+  &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_DLR, KC_AT, 1 << L_NATV, MOD_MASK_CAG),
 
   /******************/
   /* Layer agnostic */
