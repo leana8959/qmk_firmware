@@ -71,7 +71,5 @@
 
 #ifdef AUDIO_ENABLE
 # define AUDIO_INIT_DELAY  // https://github.com/qmk/qmk_firmware/issues/14242
-# define STARTUP_SONG \
-  SONG(Q__NOTE(_E5), Q__NOTE(_FS5), Q__NOTE(_G5), Q__NOTE(_A5), H__NOTE(_FS5), Q__NOTE(_D5), \
-       H__NOTE(_E5))
+# define STARTUP_SONG SONG(E__NOTE(_E5), E__NOTE(_A5), ED_NOTE(_E6))
 #endif
