@@ -23,6 +23,7 @@
 
 #include QMK_KEYBOARD_H
 #include "keymap_dvorak.h"
+#include "os_detection.h"
 
 enum layers {
   L_BASE,  // dvorak on qwerty codes
@@ -198,6 +199,31 @@ void set_game_colors(void)
       break;
     }
   }
+}
+
+// steal the magic handling logic to swap gui and control programmatically
+// https://github.com/qmk/qmk_firmware/blob/master/quantum/process_keycode/process_magic.c
+bool process_detected_host_os_user(os_variant_t os)
+{
+  keymap_config.raw = eeconfig_read_keymap();
+  switch (os) {
+  case OS_UNSURE:
+  case OS_LINUX:
+  case OS_WINDOWS:
+    // Swap on linux system
+    keymap_config.swap_rctl_rgui = true;
+    keymap_config.swap_lctl_lgui = true;
+    break;
+  case OS_MACOS:
+  case OS_IOS:
+    // restore for darwin
+    keymap_config.swap_rctl_rgui = false;
+    keymap_config.swap_lctl_lgui = false;
+    break;
+  }
+  eeconfig_update_keymap(keymap_config.raw);
+  clear_keyboard();  // clear to prevent stuck keys
+  return false;
 }
 
 bool rgb_matrix_indicators_user(void)
