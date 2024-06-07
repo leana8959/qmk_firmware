@@ -221,8 +221,6 @@ bool process_detected_host_os_user(os_variant_t os)
     keymap_config.swap_lctl_lgui = false;
     break;
   }
-  eeconfig_update_keymap(keymap_config.raw);
-  clear_keyboard();  // clear to prevent stuck keys
   return false;
 }
 
