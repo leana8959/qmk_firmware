@@ -18,7 +18,6 @@
 
 #pragma once
 
-#define ORYX_CONFIGURATOR
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define CAPS_LOCK_STATUS
 #define HOLD_ON_OTHER_KEY_PRESS
@@ -68,6 +67,9 @@
 #undef ENABLE_RGB_MATRIX_MULTISPLASH
 #undef ENABLE_RGB_MATRIX_SOLID_SPLASH
 #undef ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
+
+// Only enable the heatmap effect
+#define ENABLE_RGB_MATRIX_TYPING_HEATMAP
 
 #ifdef AUDIO_ENABLE
 # define AUDIO_INIT_DELAY  // https://github.com/qmk/qmk_firmware/issues/14242

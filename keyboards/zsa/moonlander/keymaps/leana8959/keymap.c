@@ -239,3 +239,9 @@ bool rgb_matrix_indicators_user(void)
   }
   return true;
 }
+
+// Just so when I wipe my eeprom I don't blind my eyes
+void keyboard_post_init_user(void)
+{
+  rgb_matrix_mode_noeeprom(RGB_MATRIX_TYPING_HEATMAP);
+}
