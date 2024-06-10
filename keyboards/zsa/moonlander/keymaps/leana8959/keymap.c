@@ -201,29 +201,6 @@ void set_game_colors(void)
   }
 }
 
-// steal the magic handling logic to swap gui and control programmatically
-// https://github.com/qmk/qmk_firmware/blob/master/quantum/process_keycode/process_magic.c
-bool process_detected_host_os_user(os_variant_t os)
-{
-  keymap_config.raw = eeconfig_read_keymap();
-  switch (os) {
-  case OS_UNSURE:
-  case OS_LINUX:
-  case OS_WINDOWS:
-    // Swap on linux system
-    keymap_config.swap_rctl_rgui = true;
-    keymap_config.swap_lctl_lgui = true;
-    break;
-  case OS_MACOS:
-  case OS_IOS:
-    // restore for darwin
-    keymap_config.swap_rctl_rgui = false;
-    keymap_config.swap_lctl_lgui = false;
-    break;
-  }
-  return false;
-}
-
 bool rgb_matrix_indicators_user(void)
 {
   switch (get_highest_layer(default_layer_state | layer_state)) {
@@ -240,8 +217,8 @@ bool rgb_matrix_indicators_user(void)
   return true;
 }
 
-// Just so when I wipe my eeprom I don't blind my eyes
-void keyboard_post_init_user(void)
-{
-  rgb_matrix_mode(RGB_MATRIX_TYPING_HEATMAP);
-}
+// // Just so when I wipe my eeprom I don't blind my eyes
+// void keyboard_post_init_user(void)
+// {
+//   rgb_matrix_mode(RGB_MATRIX_TYPING_HEATMAP);
+// }
