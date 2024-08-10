@@ -28,7 +28,7 @@
 enum layers {
   L_BASE,  // dvorak on qwerty codes
   L_NATV,  // native dvorak
-  L_GAME,  // WASD and stuff
+  L_PAGE,  // pager mode
   L_FUNC   // function keys
 };
 
@@ -36,7 +36,7 @@ enum layers {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // TODO: macro to open iTerm on red button on the right hand
     [L_BASE] = LAYOUT(
-        OSL(L_FUNC),  DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     TG(L_GAME),
+        OSL(L_FUNC),  DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     TG(L_PAGE),
         KC_CAPS,  DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
         KC_ESC,   DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
         KC_LSFT,  DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     KC_RSFT,
@@ -53,10 +53,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                              _______, _______, KC_DLR,            KC_GRV,  _______, _______
     ),
 
-    [L_GAME] = LAYOUT(
+    [L_PAGE] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, DV_W,    _______, _______, _______,          _______,  _______, _______, KC_UP,   _______, _______, _______,
-        _______,  _______, DV_A,    DV_S,    DV_D,    _______, _______,          _______,  _______, KC_LEFT, KC_DOWN, KC_RIGHT,_______, _______,
+        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, LCTL(DV_U), _______, _______,          _______,  LCTL(DV_D), _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
                                              KC_SPC,  _______, _______,          _______,  _______, _______
@@ -185,17 +185,11 @@ void set_game_colors(void)
   // Loop over all LEDs to disable not specified ones
   for (uint8_t i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
     switch (i) {
-    // lhs
-    case 12:
-    case 16:
-    case 17:
+    // ctrl u
     case 22:
-    // rhs
-    case 48:
-    case 52:
-    case 53:
-    case 58:
-      rgb_matrix_set_color(i, 15, 208, 255);  // cyan
+    // ctrl d
+    case 63:
+      rgb_matrix_set_color(i, 235, 207, 0);  // yellow
       break;
     }
   }
@@ -210,7 +204,7 @@ bool rgb_matrix_indicators_user(void)
   case L_NATV:
     set_natv_colors();
     break;
-  case L_GAME:
+  case L_PAGE:
     set_game_colors();
     break;
   }
