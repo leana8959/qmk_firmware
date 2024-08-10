@@ -45,12 +45,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [L_NATV] = LAYOUT(
-        _______,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_BRIU,          KC_VOLU,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     _______,
-        KC_CAPS,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_BRID,          KC_VOLD,   KC_F,    KC_G,    KC_C,    KC_R,    KC_L,     KC_SLSH,
-        KC_ESC,   KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_PLUS,          KC_EQL,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,     KC_MINS,
-        KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                                 KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,     KC_RSFT,
-        KC_APP,   KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         XXXXXXX,           KC_BSLS,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, DF(L_BASE),
-                                             KC_SPC,  KC_TAB, KC_DLR,            KC_GRV,    KC_ENT,  KC_BSPC
+        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    _______,          _______,  KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
+        _______,  LSFT_T(KC_A),    LCTL_T(KC_O),    LALT_T(KC_E),    LGUI_T(KC_U),    KC_I,    KC_PLUS,          KC_EQL,   KC_D,    RGUI_T(KC_H),    RALT_T(KC_T),    RCTL_T(KC_N),    RSFT_T(KC_S),    KC_MINS,
+        _______,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                                KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    _______,
+        _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, DF(L_BASE),
+                                             _______, _______, KC_DLR,            KC_GRV,  _______, _______
     ),
 
     [L_GAME] = LAYOUT(
