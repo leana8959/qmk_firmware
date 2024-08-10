@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [L_NATV] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    _______,          _______,  KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
-        _______,  LSFT_T(KC_A),    LCTL_T(KC_O),    LALT_T(KC_E),    LGUI_T(KC_U),    KC_I,    KC_PLUS,          KC_EQL,   KC_D,    RGUI_T(KC_H),    RALT_T(KC_T),    RCTL_T(KC_N),    RSFT_T(KC_S),    KC_MINS,
+        _______,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_PLUS,          KC_EQL,   KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_MINS,
         _______,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                                KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, DF(L_BASE),
                                              _______, _______, KC_DLR,            KC_GRV,  _______, _______
