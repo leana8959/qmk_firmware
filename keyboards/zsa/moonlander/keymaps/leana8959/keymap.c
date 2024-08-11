@@ -23,7 +23,6 @@
 
 #include QMK_KEYBOARD_H
 #include "keymap_dvorak.h"
-#include "os_detection.h"
 
 enum layers {
   L_BASE,  // dvorak on qwerty codes
