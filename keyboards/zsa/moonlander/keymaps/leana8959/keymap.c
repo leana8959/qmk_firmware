@@ -74,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-const key_override_t **key_overrides = (const key_override_t *[]){
+const key_override_t *key_overrides[] = {
   /***********************/
   /* Override for dvorak */
   /***********************/
@@ -126,9 +126,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
   &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_BSPC, KC_DEL, ~0, MOD_MASK_CAG),
 
   // &ko_make_basic(MOD_MASK_SHIFT, KC_0, TG(L_FUNC)),  // FIXME:
-
-  // Ending NULL
-  NULL
 };
 
 void set_fn_colors(void)
