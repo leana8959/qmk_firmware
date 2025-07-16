@@ -27,7 +27,7 @@
 enum layers {
   L_BASE,  // dvorak on qwerty codes
   L_NATV,  // native dvorak
-  L_FUNC   // function keys
+  L_FUNC,  // function keys
 };
 
 // clang-format off
@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [L_FUNC] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______,  KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
-        _______,  _______, _______, _______, _______, KC_F6,   _______,          _______,  KC_F7,   KC_MEDIA_PREV_TRACK,
+        _______,  KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, KC_F6,   _______,          _______,  KC_F7,   KC_MEDIA_PREV_TRACK,
                                                                                                              KC_MEDIA_PLAY_PAUSE,
                                                                                                                       KC_MEDIA_NEXT_TRACK,
                                                                                                                                _______, _______,
@@ -114,6 +114,14 @@ void set_fn_colors(void)
     case 48:
     case 53:
     case 58:
+      rgb_matrix_set_color(i, 255, 255, 255);
+      break;
+
+    // brightness / volume controls
+    case 7:
+    case 12:
+    case 17:
+    case 22:
       rgb_matrix_set_color(i, 255, 255, 255);
       break;
 
