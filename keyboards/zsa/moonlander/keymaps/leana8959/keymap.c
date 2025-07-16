@@ -46,8 +46,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
         // ^ assume that os mapping sees this as an escape
         KC_LSFT,  DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     KC_RSFT,
-        KC_NO,    KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         KC_NO,           DV_BSLS,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, DF(L_NATV),
-                                             KC_SPC,  KC_TAB,  DV_DLR,           OSL(L_FUNC), KC_ENT, KC_BSPC
+        KC_NO,    KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN),
+                                             MT(MOD_LGUI, KC_UP),
+                                                               KC_NO,            DV_BSLS,            MT(MOD_RGUI, KC_LEFT),
+                                                                                                              MT(MOD_RALT, KC_RIGHT),
+                                                                                                                       KC_RCTL, KC_RSFT,  DF(L_NATV),
+                                             KC_SPC,  KC_TAB,  DV_DLR,           OSL(L_FUNC),
+                                                                                            KC_ENT, KC_BSPC
     ),
 
     [L_NATV] = LAYOUT(
@@ -63,7 +68,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [L_FUNC] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______,  KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
-        _______,  _______, _______, _______, _______, KC_F6,   _______,          _______,  KC_F7,   KC_MEDIA_PREV_TRACK, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_NEXT_TRACK, _______, _______,
+        _______,  _______, _______, _______, _______, KC_F6,   _______,          _______,  KC_F7,   KC_MEDIA_PREV_TRACK,
+                                                                                                             KC_MEDIA_PLAY_PAUSE,
+                                                                                                                      KC_MEDIA_NEXT_TRACK,
+                                                                                                                               _______, _______,
         _______,  _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
                                              _______, _______, _______,          _______,  _______, _______
