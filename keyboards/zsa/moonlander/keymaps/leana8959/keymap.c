@@ -135,7 +135,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
   case MT(MOD_LCTL, DV_SCLN): {
     // Wait for a long time if shift is held
     // This would effecitvely allow `:` to be triggered correctly
-    // Most of the time I wouldn't want 500 here
     if (get_mods() & MOD_MASK_SHIFT)
       return TAPPING_TERM + 500;
     return TAPPING_TERM;
