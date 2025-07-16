@@ -39,17 +39,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     - maybe use key combos to do anti slash?
     */
     [L_BASE] = LAYOUT(
-        DV_GRV,   DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     KC_NO,
-        // ^ tmux prefix, easy to reach and I don't might lifting my hand
-        KC_LCTL,  DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
-        // ^ help me type some neovim keybinds without playing finger twist
+        KC_NO,    DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     KC_NO,
+        DV_GRV,   DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
+        // ^ tmux prefix
         KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
         // ^ assume that os mapping sees this as an escape
-        KC_LSFT,  DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     KC_RSFT,
-        KC_NO,    KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN),
-                                             MT(MOD_LGUI, KC_UP),
-                                                               KC_NO,            DV_BSLS,            MT(MOD_RGUI, KC_LEFT),
-                                                                                                              MT(MOD_RALT, KC_RIGHT),
+        KC_LSFT,  MT(MOD_LCTL,DV_SCLN),
+                           DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    MT(MOD_RCTL,DV_Z),
+                                                                                                                                          KC_RSFT,
+        KC_NO,    KC_LSFT, KC_LCTL, MT(MOD_LALT,KC_DOWN),
+                                             MT(MOD_LGUI,KC_UP),
+                                                               KC_NO,            DV_BSLS,            MT(MOD_RGUI,KC_LEFT),
+                                                                                                              MT(MOD_RALT,KC_RIGHT),
                                                                                                                        KC_RCTL, KC_RSFT,  DF(L_NATV),
                                              KC_SPC,  KC_TAB,  DV_DLR,           OSL(L_FUNC),
                                                                                             KC_ENT, KC_BSPC
@@ -60,7 +61,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    _______,          _______,  KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
         KC_ESC,   KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_PLUS,          KC_EQL,   KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_MINS,
         // ^ assume that we don't have os mapping for this layer
-        _______,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                                KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    _______,
+        _______,  MT(MOD_LCTL,KC_SCLN),
+                           KC_Q,    KC_J,    KC_K,    KC_X,                                KC_B,    KC_M,    KC_W,    KC_V,    MT(MOD_RCTL,KC_Z),
+                                                                                                                                        _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, DF(L_BASE),
                                              _______, _______, KC_DLR,            KC_GRV,  _______, _______
     ),
