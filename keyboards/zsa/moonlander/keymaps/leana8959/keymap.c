@@ -165,11 +165,6 @@ void set_fn_colors(void)
       rgb_matrix_set_color(i, 255, 255, 255);
       break;
 
-    // go back?
-    case 0:
-      rgb_matrix_set_color(i, 168, 16, 255);  // purple
-      break;
-
     default:
       rgb_matrix_set_color(i, 0, 0, 0);
       break;
