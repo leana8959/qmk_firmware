@@ -132,13 +132,14 @@ void set_natv_colors(void)
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
-  case MT(MOD_LCTL, DV_SCLN): {
+  case MT(MOD_LCTL, KC_SCLN):
+  case MT(MOD_LCTL, DV_SCLN):
     // Wait for a long time if shift is held
     // This would effecitvely allow `:` to be triggered correctly
-    if (get_mods() & MOD_MASK_SHIFT)
+    if (get_mods() & MOD_MASK_SHIFT) {
       return TAPPING_TERM + 500;
+    }
     return TAPPING_TERM;
-  }
 
   default:
     return TAPPING_TERM;
@@ -148,16 +149,18 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
-  case MT(MOD_LCTL, DV_SCLN): {
+  case MT(MOD_LCTL, KC_SCLN):
+  case MT(MOD_LCTL, DV_SCLN):
     // Interrupt as soon as another key is hit
     // When we get shifted semicolon it's always :
     // I can't think of a case where I would want the next key to be with control held down
-    if (get_mods() & MOD_MASK_SHIFT)
+    if (get_mods() & MOD_MASK_SHIFT) {
       return false;
+    }
     return true;
-  }
 
   case MT(MOD_RCTL, DV_Z):
+  case MT(MOD_RCTL, KC_Z):
     return false;
 
   default:
