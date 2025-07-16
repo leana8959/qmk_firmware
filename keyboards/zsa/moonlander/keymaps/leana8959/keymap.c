@@ -27,10 +27,6 @@ enum layers {
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /*
-    We gotta find a new home for volume and brightness control
-    Maybe tuck it in a layer?
-    */
     [L_BASE] = LAYOUT(
         KC_NO,    DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_NO,            DV_LBRC,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     KC_NO,
         DV_GRV,   DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_NO,            DV_RBRC,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
