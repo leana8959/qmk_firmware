@@ -32,6 +32,14 @@ enum layers {
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    /*
+    Some choices:
+    - I put the $ and \ key on an easy to reach spot for Haskell
+    - I put ` on where it would've been on a normal (read: bad) keyboard so I don't have to think too much
+
+    Some problems that we might want to work on
+    - why is $ on a function key zone
+    */
     [L_BASE] = LAYOUT(
         DV_GRV,  DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     KC_NO,
         KC_ESC,   DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
