@@ -140,6 +140,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
       return TAPPING_TERM + 500;
     return TAPPING_TERM;
   }
+
   default:
     return TAPPING_TERM;
   }
@@ -156,6 +157,10 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
       return false;
     return true;
   }
+
+  case MT(MOD_RCTL, DV_Z):
+    return false;
+
   default:
     return true;
   }
