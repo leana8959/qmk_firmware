@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "action_util.h"
 #include QMK_KEYBOARD_H
 #include "keymap_dvorak.h"
 
@@ -127,6 +128,38 @@ void set_natv_colors(void)
 {
   // go back?
   rgb_matrix_set_color(40, 168, 16, 255);  // purple
+}
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
+{
+  switch (keycode) {
+  case MT(MOD_LCTL, DV_SCLN): {
+    // Wait for a long time if shift is held
+    // This would effecitvely allow `:` to be triggered correctly
+    // Most of the time I wouldn't want 500 here
+    if (get_mods() & MOD_MASK_SHIFT)
+      return TAPPING_TERM + 500;
+    return TAPPING_TERM;
+  }
+  default:
+    return TAPPING_TERM;
+  }
+}
+
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
+{
+  switch (keycode) {
+  case MT(MOD_LCTL, DV_SCLN): {
+    // Interrupt as soon as another key is hit
+    // When we get shifted semicolon it's always :
+    // I can't think of a case where I would want the next key to be with control held down
+    if (get_mods() & MOD_MASK_SHIFT)
+      return false;
+    return true;
+  }
+  default:
+    return true;
+  }
 }
 
 bool rgb_matrix_indicators_user(void)
