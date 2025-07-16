@@ -40,6 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     Some problems that we might want to work on
     - why is $ on a function key zone
+    - maybe use key combos to do anti slash?
     */
     [L_BASE] = LAYOUT(
         KC_NO,    DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     KC_NO,
