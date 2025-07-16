@@ -34,20 +34,17 @@ enum layers {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
-    Some choices:
-    - I put the $ and \ key on an easy to reach spot for Haskell
-    - I put ` on where it would've been on a normal (read: bad) keyboard so I don't have to think too much
-    - ESC:caps swap is done at the os level
-
     Some problems that we might want to work on
     - why is $ on a function key zone
     - maybe use key combos to do anti slash?
     */
     [L_BASE] = LAYOUT(
         DV_GRV,   DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     KC_NO,
+        // ^ tmux prefix, easy to reach and I don't might lifting my hand
         KC_LCTL,  DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
         // ^ help me type some neovim keybinds without playing finger twist
         KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_PLUS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
+        // ^ assume that os mapping sees this as an escape
         KC_LSFT,  DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     KC_RSFT,
         KC_NO,    KC_LSFT, KC_LCTL, MT(MOD_LALT, KC_DOWN), MT(MOD_LGUI, KC_UP),         KC_NO,           DV_BSLS,            MT(MOD_RGUI, KC_LEFT), MT(MOD_RALT, KC_RIGHT), KC_RCTL, KC_RSFT, DF(L_NATV),
                                              KC_SPC,  KC_TAB,  DV_DLR,           OSL(L_FUNC), KC_ENT, KC_BSPC
