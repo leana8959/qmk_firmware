@@ -158,7 +158,6 @@ void set_natv_colors(void)
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
-  case MT(MOD_LCTL, KC_SCLN):
   case MT(MOD_LCTL, DV_SCLN):
     // Wait for a long time if shift is held
     // This would effecitvely allow `:` to be triggered correctly
