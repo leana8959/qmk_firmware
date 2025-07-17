@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "config.h"
 #include QMK_KEYBOARD_H
 #include "keymap_dvorak.h"
 #include "print.h"
@@ -81,53 +82,48 @@ const key_override_t *key_overrides[] = {
 
 void set_fn_colors(void)
 {
-  // Loop over all LEDs to disable not specified ones
+  // Disable pass through
   for (uint8_t i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
-    switch (i) {
-    // function keys
-    // lh
-    case 6:
-    case 11:
-    case 16:
-    case 21:
-    case 26:
-    case 27:
-    // rh
-    case 42:
-    case 47:
-    case 52:
-    case 57:
-    case 62:
-    case 63:
-      rgb_matrix_set_color(i, 15, 208, 255);  // cyan
-      break;
-
-    // music keys
-    case 48:
-    case 53:
-    case 58:
-      rgb_matrix_set_color(i, 255, 255, 255);
-      break;
-
-    // brightness / volume controls
-    case 7:
-    case 12:
-    case 17:
-    case 22:
-      rgb_matrix_set_color(i, 255, 255, 255);
-      break;
-
-    default:
-      rgb_matrix_set_color(i, 0, 0, 0);
-      break;
-    }
+    rgb_matrix_set_color(i, 0, 0, 0);
   }
+
+  // Function keys
+  set_color_row_col(1, 1, 15, 208, 255);
+  set_color_row_col(1, 2, 15, 208, 255);
+  set_color_row_col(1, 3, 15, 208, 255);
+  set_color_row_col(1, 4, 15, 208, 255);
+  set_color_row_col(1, 5, 15, 208, 255);
+  set_color_row_col(2, 5, 15, 208, 255);
+
+  set_color_row_col(7, 1, 15, 208, 255);
+  set_color_row_col(7, 2, 15, 208, 255);
+  set_color_row_col(7, 3, 15, 208, 255);
+  set_color_row_col(7, 4, 15, 208, 255);
+  set_color_row_col(7, 5, 15, 208, 255);
+  set_color_row_col(8, 5, 15, 208, 255);
+
+  // Music keys
+  set_color_row_col(8, 2, 255, 255, 255);
+  set_color_row_col(8, 3, 255, 255, 255);
+  set_color_row_col(8, 4, 255, 255, 255);
+
+  // Brightness / volume control
+  set_color_row_col(2, 1, 255, 255, 255);
+  set_color_row_col(2, 2, 255, 255, 255);
+  set_color_row_col(2, 3, 255, 255, 255);
+  set_color_row_col(2, 4, 255, 255, 255);
+
+  // Go back
+  set_color_row_col(5, 2, 168, 16, 255);
+  set_color_row_col(11, 4, 168, 16, 255);
 }
 
 void set_natv_colors(void)
 {
-  // go back?
-  rgb_matrix_set_color(40, 168, 16, 255);  // purple
+  // Let color pass through
+
+  // Go back
+  set_color_row_col(10, 6, 168, 16, 255);
 }
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)

@@ -25,7 +25,7 @@
 
 #define TAPPING_TERM_PER_KEY
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
-#define FLOW_TAP_TERM 150
+#define FLOW_TAP_TERM          150
 
 #define RGB_MATRIX_STARTUP_SPD 60
 
@@ -79,3 +79,6 @@
 # define AUDIO_INIT_DELAY  // https://github.com/qmk/qmk_firmware/issues/14242
 # define STARTUP_SONG SONG(E__NOTE(_E5), E__NOTE(_A5), ED_NOTE(_E6))
 #endif
+
+#define set_color_row_col(row, col, r, g, b) \
+  rgb_matrix_set_color(g_led_config.matrix_co[row][col], r, g, b)
