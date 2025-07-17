@@ -74,6 +74,7 @@
 
 // Only enable the heatmap effect
 #define ENABLE_RGB_MATRIX_TYPING_HEATMAP
+#define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_TYPING_HEATMAP
 
 #ifdef AUDIO_ENABLE
 # define AUDIO_INIT_DELAY  // https://github.com/qmk/qmk_firmware/issues/14242
