@@ -183,6 +183,13 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
     }
     return true;
 
+  case LT(L_SYMB, DV_MINS):
+    // Interrupt if shift is held down
+    if (get_mods() & MOD_MASK_SHIFT) {
+      return false;
+    }
+    return true;
+
   case MT(MOD_RCTL, DV_Z):
     return false;
 
