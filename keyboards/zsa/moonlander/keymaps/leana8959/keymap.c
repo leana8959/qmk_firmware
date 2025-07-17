@@ -149,7 +149,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
-  case MT(MOD_LCTL, KC_SCLN):
   case MT(MOD_LCTL, DV_SCLN):
     // Interrupt as soon as another key is hit
     // When we get shifted semicolon it's always :
@@ -160,11 +159,30 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
     return true;
 
   case MT(MOD_RCTL, DV_Z):
-  case MT(MOD_RCTL, KC_Z):
     return false;
 
   default:
     return true;
+  }
+}
+
+uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_keycode)
+{
+  // Disable flowtap
+  if (!is_flow_tap_key(keycode) || !is_flow_tap_key(prev_keycode)) {
+    return 0;
+  }
+
+  switch (keycode) {
+  // Z is control, but not a lot of words start with it (unless you speak German, which I don't. For
+  // now.)
+  //
+  // Make these words delay more since they are more probable to be a hold than a tap
+  case DV_Z:
+    return FLOW_TAP_TERM + 50;
+
+  default:
+    return FLOW_TAP_TERM;
   }
 }
 
