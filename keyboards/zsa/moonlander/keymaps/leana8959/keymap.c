@@ -16,13 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "config.h"
 #include QMK_KEYBOARD_H
 #include "keymap_dvorak.h"
 #include "print.h"
 
 enum layers {
   L_BASE,  // dvorak on qwerty codes
+  L_SYMB,  // I like symbols
   L_NATV,  // native dvorak
   L_FUNC,  // function keys
 };
@@ -33,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,    DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    DV_LBRC,          KC_NO,     DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     KC_NO,
         DV_GRV,   DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    DV_RBRC,          KC_NO,     DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
         // ^ tmux prefix
-        KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_BSLS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     DV_MINS,
+        KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_BSLS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     LT(L_SYMB,DV_MINS),
         // ^ assume that os mapping sees this as an escape
         KC_LSFT,  MT(MOD_LCTL,DV_SCLN),
                            DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    MT(MOD_RCTL,DV_Z),
@@ -47,12 +47,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                                             KC_ENT, KC_BSPC
     ),
 
-    // This layer is frozen and will be updated to match the dvorak later
+    [L_SYMB] = LAYOUT(
+        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, DV_LCBR, DV_RCBR, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, DV_LPRN, DV_RPRN, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, DV_LBRC, DV_RBRC, _______,                             _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
+                                             _______, _______, _______,          _______,  _______, _______
+    ),
+
     [L_NATV] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, KC_LBRC,          _______,  _______, _______, _______, _______, _______, _______,
         KC_GRV,   KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_RBRC,          _______,  KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
         KC_ESC,   KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_BSLS,          KC_EQL,   KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_MINS,
-        // ^ assume that we don't have os mapping for this layer
+        // ^ assume that we don't have os mapping for this layer                                                                        ^ too lazy to
+        //                                                                                                                                add another layer
         _______,  MT(MOD_LCTL,KC_SCLN),
                            KC_Q,    KC_J,    KC_K,    KC_X,                                KC_B,    KC_M,    KC_W,    KC_V,    MT(MOD_RCTL,KC_Z),
                                                                                                                                         _______,
@@ -117,6 +126,25 @@ void set_fn_colors(void)
   // Go back
   set_color_row_col(5, 2, 168, 16, 255);
   set_color_row_col(11, 4, 168, 16, 255);
+}
+
+void set_symb_colors(void)
+{
+  // Disable pass through
+  for (uint8_t i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
+    rgb_matrix_set_color(i, 0, 0, 0);
+  }
+
+  // Symbols
+  set_color_row_col(1, 3, 15, 208, 255);
+  set_color_row_col(1, 4, 15, 208, 255);
+  set_color_row_col(2, 3, 15, 208, 255);
+  set_color_row_col(2, 4, 15, 208, 255);
+  set_color_row_col(3, 3, 15, 208, 255);
+  set_color_row_col(3, 4, 15, 208, 255);
+
+  // Go back
+  set_color_row_col(8, 6, 168, 16, 255);
 }
 
 void set_natv_colors(void)
@@ -197,6 +225,9 @@ bool rgb_matrix_indicators_user(void)
   switch (get_highest_layer(default_layer_state | layer_state)) {
   case L_FUNC:
     set_fn_colors();
+    break;
+  case L_SYMB:
+    set_symb_colors();
     break;
   case L_NATV:
     set_natv_colors();
