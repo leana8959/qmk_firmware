@@ -18,6 +18,7 @@
 
 #include QMK_KEYBOARD_H
 #include "keymap_dvorak.h"
+#include "print.h"
 
 enum layers {
   L_BASE,  // dvorak on qwerty codes
@@ -58,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [L_FUNC] = LAYOUT(
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, DB_TOGG,
         _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______,  KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
         _______,  KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, KC_F6,   _______,          _______,  KC_F7,   KC_MEDIA_PREV_TRACK,
                                                                                                              KC_MEDIA_PLAY_PAUSE,
@@ -168,18 +169,26 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
 
 uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_keycode)
 {
-  // Disable flowtap
   if (!is_flow_tap_key(keycode) || !is_flow_tap_key(prev_keycode)) {
     return 0;
   }
 
   switch (keycode) {
-  // Z is control, but not a lot of words start with it (unless you speak German, which I don't. For
-  // now.)
-  //
-  // Make these words delay more since they are more probable to be a hold than a tap
-  case DV_Z:
-    return FLOW_TAP_TERM + 50;
+  // turn this off, high error rate
+  case MT(MOD_LCTL, DV_SCLN):
+    return 0;
+
+  // on word boundary use default hold logic
+  case MT(MOD_RCTL, DV_Z):
+    switch (prev_keycode) {
+    case DV_RPRN:
+    case KC_ENTER:
+    case KC_SPACE:
+      return 0;
+
+    default:
+      return FLOW_TAP_TERM;
+    }
 
   default:
     return FLOW_TAP_TERM;
