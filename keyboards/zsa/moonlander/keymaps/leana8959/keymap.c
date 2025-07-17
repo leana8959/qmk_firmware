@@ -31,8 +31,8 @@ enum layers {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [L_BASE] = LAYOUT(
-        KC_NO,    DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_NO,            KC_NO,     DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     KC_NO,
-        DV_GRV,   DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_NO,            KC_NO,     DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
+        KC_NO,    DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     KC_NO,
+        DV_GRV,   DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
         // ^ tmux prefix
         KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_BSLS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     LT(L_SYMB,DV_MINS),
         // ^ assume that os mapping sees this as an escape
@@ -67,7 +67,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            KC_Q,    KC_J,    KC_K,    KC_X,                                KC_B,    KC_M,    KC_W,    KC_V,    MT(MOD_RCTL,KC_Z),
                                                                                                                                         _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, DF(L_BASE),
-                                             _______, _______, KC_NO,            KC_GRV,   _______, _______
+                                             _______, _______, OSL(L_FUNC),      OSL(L_FUNC),
+                                                                                           _______, _______
     ),
 
     [L_FUNC] = LAYOUT(
