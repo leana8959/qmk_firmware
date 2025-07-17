@@ -74,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [L_FUNC] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, DB_TOGG,
         _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______,  KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
-        _______,  KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, KC_F6,   _______,          _______,  KC_F7,   KC_MEDIA_PREV_TRACK,
+        _______,  _______, _______, _______, _______, KC_F6,   _______,          _______,  KC_F7,   KC_MEDIA_PREV_TRACK,
                                                                                                              KC_MEDIA_PLAY_PAUSE,
                                                                                                                       KC_MEDIA_NEXT_TRACK,
                                                                                                                                _______, _______,
@@ -118,12 +118,6 @@ void set_fn_colors(void)
   set_color_row_col(8, 2, 255, 255, 255);
   set_color_row_col(8, 3, 255, 255, 255);
   set_color_row_col(8, 4, 255, 255, 255);
-
-  // Brightness / volume control
-  set_color_row_col(2, 1, 255, 255, 255);
-  set_color_row_col(2, 2, 255, 255, 255);
-  set_color_row_col(2, 3, 255, 255, 255);
-  set_color_row_col(2, 4, 255, 255, 255);
 
   // Go back
   set_color_row_col(5, 2, 168, 16, 255);
