@@ -87,6 +87,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+// clang-format off
+const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
+    LAYOUT(
+        '*',  '*', '*', '*', '*', '*', '*',          '*',  '*', '*', '*', '*', '*', '*',
+        '*',  '*', '*', '*', '*', '*', '*',          '*',  '*', '*', '*', '*', '*', '*',
+        '*',  '*', '*', '*', '*', '*', '*',          '*',  '*', '*', '*', '*', '*', '*',
+        '*',  'l', '*', '*', '*', '*',                     '*', '*', '*', '*', '*', '*',
+        '*',  '*', '*', '*', '*',      '*',          '*',       '*', '*', '*', '*', '*',
+                             'l', '*', '*',          '*',  '*', '*'
+                           // ^ I would roll the space, hack chordal hold to disambiguate
+    );
+// clang-format off
+
 const key_override_t *key_overrides[] = {
   // Shift + Backspace = Delete
   &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_BSPC, KC_DEL, ~0, MOD_MASK_CAG),
@@ -237,6 +250,7 @@ bool rgb_matrix_indicators_user(void)
   }
   return true;
 }
+
 
 void keyboard_post_init_user(void)
 {
