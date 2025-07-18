@@ -107,12 +107,12 @@ void set_fn_colors(void)
   set_color_row_col(1, 5, 15, 208, 255);
   set_color_row_col(2, 5, 15, 208, 255);
 
+  set_color_row_col(8, 1, 15, 208, 255);
   set_color_row_col(7, 1, 15, 208, 255);
   set_color_row_col(7, 2, 15, 208, 255);
   set_color_row_col(7, 3, 15, 208, 255);
   set_color_row_col(7, 4, 15, 208, 255);
   set_color_row_col(7, 5, 15, 208, 255);
-  set_color_row_col(8, 5, 15, 208, 255);
 
   // Music keys
   set_color_row_col(8, 2, 255, 255, 255);
