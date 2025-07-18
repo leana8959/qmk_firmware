@@ -39,11 +39,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,  MT(MOD_LCTL,DV_SCLN),
                            DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    MT(MOD_RCTL,DV_Z),
                                                                                                                                           KC_RSFT,
-        KC_NO,    KC_LSFT, KC_LCTL, MT(MOD_LALT,KC_DOWN),
-                                             MT(MOD_LGUI,KC_UP),
-                                                               KC_NO,            KC_NO,              MT(MOD_RGUI,KC_LEFT),
-                                                                                                              MT(MOD_RALT,KC_RIGHT),
-                                                                                                                       KC_RCTL, KC_RSFT,  DF(L_NATV),
+        KC_NO,    KC_NO,   KC_NO,   KC_DOWN, KC_UP,            KC_NO,            KC_NO,              KC_LEFT, KC_RIGHT,
+                                                                                                                       KC_NO,   KC_NO,    DF(L_NATV),
                                              KC_SPC,  KC_TAB,  OSL(L_FUNC),      OSL(L_FUNC),
                                                                                             KC_ENT, KC_BSPC
     ),
