@@ -26,7 +26,6 @@
 #define TAPPING_TERM_PER_KEY
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 #define FLOW_TAP_TERM 100
-#define CHORDAL_HOLD
 
 // Reduce combo misfire
 #define COMBO_MUST_HOLD_MODS
