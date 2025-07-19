@@ -243,7 +243,7 @@ const uint16_t PROGMEM combo_csuper_l[] = {MT(MOD_LCTL,DV_SCLN), DV_K, COMBO_END
 const uint16_t PROGMEM combo_super_r[] = {DV_T, DV_M, COMBO_END};
 const uint16_t PROGMEM combo_ca_r[] = {DV_T, DV_V, COMBO_END};
 const uint16_t PROGMEM combo_cs_r[] = {DV_T, MT(MOD_RCTL,DV_Z), COMBO_END};
-const uint16_t PROGMEM combo_csuper_r[] = {DV_M, DV_T, MT(MOD_RCTL,DV_Z), COMBO_END};
+const uint16_t PROGMEM combo_csuper_r[] = {DV_M, MT(MOD_RCTL,DV_Z), COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_super_l, KC_LGUI),
