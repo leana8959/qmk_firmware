@@ -191,6 +191,27 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
   }
 }
 
+bool is_flow_tap_key(uint16_t keycode)
+{
+  if ((get_mods() & (MOD_MASK_CG | MOD_BIT_LALT)) != 0) {
+    return false;  // Disable Flow Tap on hotkeys.
+  }
+  switch (get_tap_keycode(keycode)) {
+  case KC_SPC:
+  case KC_A ... KC_Z:
+  case KC_DOT:
+  case KC_COMM:
+  case KC_SCLN:
+  case KC_SLSH:
+    return true;
+
+    // customizations
+  case DV_MINS:  // For the enclosing symbol toggle
+    return true;
+  }
+  return false;
+}
+
 uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_keycode)
 {
   if (!is_flow_tap_key(keycode) || !is_flow_tap_key(prev_keycode)) {
@@ -235,26 +256,22 @@ bool rgb_matrix_indicators_user(void)
   return true;
 }
 
-const uint16_t PROGMEM combo_super_l[] = {DV_E, DV_K, COMBO_END};
-const uint16_t PROGMEM combo_ca_l[] = {DV_Q, DV_E, COMBO_END};
-const uint16_t PROGMEM combo_cs_l[] = {DV_E, MT(MOD_LCTL,DV_SCLN), COMBO_END};
-const uint16_t PROGMEM combo_csuper_l[] = {MT(MOD_LCTL,DV_SCLN), DV_K, COMBO_END};
+const uint16_t PROGMEM combo_super_l[] = { DV_E, DV_K, COMBO_END };
+const uint16_t PROGMEM combo_ca_l[] = { DV_Q, DV_E, COMBO_END };
+const uint16_t PROGMEM combo_cs_l[] = { DV_E, MT(MOD_LCTL, DV_SCLN), COMBO_END };
+const uint16_t PROGMEM combo_csuper_l[] = { MT(MOD_LCTL, DV_SCLN), DV_K, COMBO_END };
 
-const uint16_t PROGMEM combo_super_r[] = {DV_T, DV_M, COMBO_END};
-const uint16_t PROGMEM combo_ca_r[] = {DV_T, DV_V, COMBO_END};
-const uint16_t PROGMEM combo_cs_r[] = {DV_T, MT(MOD_RCTL,DV_Z), COMBO_END};
-const uint16_t PROGMEM combo_csuper_r[] = {DV_M, MT(MOD_RCTL,DV_Z), COMBO_END};
+const uint16_t PROGMEM combo_super_r[] = { DV_T, DV_M, COMBO_END };
+const uint16_t PROGMEM combo_ca_r[] = { DV_T, DV_V, COMBO_END };
+const uint16_t PROGMEM combo_cs_r[] = { DV_T, MT(MOD_RCTL, DV_Z), COMBO_END };
+const uint16_t PROGMEM combo_csuper_r[] = { DV_M, MT(MOD_RCTL, DV_Z), COMBO_END };
 
 combo_t key_combos[] = {
-    COMBO(combo_super_l, KC_LGUI),
-    COMBO(combo_ca_l, LALT(KC_LCTL)),
-    COMBO(combo_cs_l, LSFT(KC_LCTL)),
-    COMBO(combo_csuper_l, LSFT(KC_LGUI)),
+  COMBO(combo_super_l, KC_LGUI),    COMBO(combo_ca_l, LALT(KC_LCTL)),
+  COMBO(combo_cs_l, LSFT(KC_LCTL)), COMBO(combo_csuper_l, LSFT(KC_LGUI)),
 
-    COMBO(combo_super_r, KC_RGUI),
-    COMBO(combo_ca_r, RALT(KC_RCTL)),
-    COMBO(combo_cs_r, RSFT(KC_RCTL)),
-    COMBO(combo_csuper_r, RSFT(KC_RGUI)),
+  COMBO(combo_super_r, KC_RGUI),    COMBO(combo_ca_r, RALT(KC_RCTL)),
+  COMBO(combo_cs_r, RSFT(KC_RCTL)), COMBO(combo_csuper_r, RSFT(KC_RGUI)),
 };
 
 void keyboard_post_init_user(void)
