@@ -167,22 +167,15 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
+    // Compromise on ; since its rarely used in a phrase
   case MT(MOD_LCTL, DV_SCLN):
-    // Interrupt as soon as another key is hit
-    // When we get shifted semicolon it's always :
-    // I can't think of a case where I would want the next key to be with control held down
     if (get_mods() & MOD_MASK_SHIFT) {
       return false;
     }
     return true;
 
+    // Rely on flowtap, allow slurring
   case LT(L_SYMB, DV_MINS):
-    // Interrupt if shift is held down
-    if (get_mods() & MOD_MASK_SHIFT) {
-      return false;
-    }
-    return true;
-
   case MT(MOD_RCTL, DV_Z):
     return true;
 
