@@ -263,7 +263,7 @@ combo_t key_combos[] = {
   COMBO(combo_super_l, KC_LGUI),    COMBO(combo_ca_l, LALT(KC_LCTL)),
   COMBO(combo_cs_l, LSFT(KC_LCTL)), COMBO(combo_csuper_l, LSFT(KC_LGUI)),
 
-  COMBO(combo_super_r, KC_RGUI),    COMBO(combo_ca_r, RALT(KC_RCTL)),
+  COMBO(combo_super_r, KC_RGUI),    COMBO(combo_ca_r, LALT(KC_RCTL) /* use LALT because ralt (altgr) is used for x11's compose key */),
   COMBO(combo_cs_r, RSFT(KC_RCTL)), COMBO(combo_csuper_r, RSFT(KC_RGUI)),
 };
 
