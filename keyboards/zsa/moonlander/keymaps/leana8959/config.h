@@ -18,9 +18,11 @@
 
 #pragma once
 
-#define USB_SUSPEND_WAKEUP_DELAY 0
-#define CAPS_LOCK_STATUS
+// Don't use leds for layer display but status
 #define MOONLANDER_USER_LEDS
+#define CAPS_LOCK_STATUS
+
+// Allow maximum 8 layers
 #define LAYER_STATE_8BIT
 
 #define TAPPING_TERM_PER_KEY
@@ -33,6 +35,7 @@
 
 #define RGB_MATRIX_STARTUP_SPD 60
 
+// Only enable the heatmap effect
 #undef ENABLE_RGB_MATRIX_ALPHAS_MODS
 #undef ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN
 #undef ENABLE_RGB_MATRIX_GRADIENT_LEFT_RIGHT
@@ -75,8 +78,6 @@
 #undef ENABLE_RGB_MATRIX_MULTISPLASH
 #undef ENABLE_RGB_MATRIX_SOLID_SPLASH
 #undef ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
-
-// Only enable the heatmap effect
 #define ENABLE_RGB_MATRIX_TYPING_HEATMAP
 
 #ifdef AUDIO_ENABLE
