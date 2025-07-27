@@ -176,7 +176,12 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
 
     // Rely on flowtap, allow slurring
   case LT(L_SYMB, DV_MINS):
+    return true;
+
   case MT(MOD_RCTL, DV_Z):
+    if (get_mods() & MOD_MASK_SHIFT) {
+      return false;
+    }
     return true;
 
   default:
