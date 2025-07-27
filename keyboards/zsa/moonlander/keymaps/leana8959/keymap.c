@@ -216,6 +216,9 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_
   case MT(MOD_LCTL, DV_SCLN):
     return 0;
 
+  case LT(L_SYMB, DV_MINS):
+    return FLOW_TAP_TERM - 40;
+
   default:
     return FLOW_TAP_TERM;
   }
