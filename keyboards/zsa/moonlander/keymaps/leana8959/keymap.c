@@ -216,18 +216,6 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_
   case MT(MOD_LCTL, DV_SCLN):
     return 0;
 
-  // on word boundary use default hold logic
-  case MT(MOD_RCTL, DV_Z):
-    switch (prev_keycode) {
-    case DV_RPRN:
-    case KC_ENTER:
-    case KC_SPACE:
-      return 0;
-
-    default:
-      return FLOW_TAP_TERM;
-    }
-
   default:
     return FLOW_TAP_TERM;
   }
