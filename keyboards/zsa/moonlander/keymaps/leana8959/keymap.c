@@ -43,9 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                KC_RALT,          KC_RALT,            MT(MOD_LGUI,KC_LEFT),
                                                                                                               KC_RIGHT,
                                                                                                                        KC_NO,   KC_NO,    KC_NO,
-                                             KC_SPC,  KC_TAB,  KC_NO,            KC_NO,
-                                                                                            KC_ENT,  KC_BSPC
-                                                   // ^ tmux prefix
+                                             KC_SPC,  KC_TAB,  KC_NO,            KC_NO,     KC_ENT,  KC_BSPC
     ),
 
     [L_SYMB] = LAYOUT(
