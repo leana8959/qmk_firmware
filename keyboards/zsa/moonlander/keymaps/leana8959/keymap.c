@@ -245,25 +245,21 @@ bool rgb_matrix_indicators_user(void)
   return true;
 }
 
-const uint16_t PROGMEM super_l[] = { DV_E, DV_K, COMBO_END };
 const uint16_t PROGMEM ctrl_alt_l[] = { DV_Q, DV_E, COMBO_END };
 const uint16_t PROGMEM ctrl_shft_l[] = { DV_E, MT(MOD_LCTL, DV_SCLN), COMBO_END };
 const uint16_t PROGMEM ctrl_super_l[] = { MT(MOD_LCTL, DV_SCLN), DV_K, COMBO_END };
 const uint16_t PROGMEM alt_super_l[] = { DV_O, DV_K, COMBO_END };
 
-const uint16_t PROGMEM super_r[] = { DV_T, DV_M, COMBO_END };
 const uint16_t PROGMEM ctrl_alt_r[] = { DV_T, DV_V, COMBO_END };
 const uint16_t PROGMEM ctrl_shft_r[] = { DV_T, MT(MOD_RCTL, DV_Z), COMBO_END };
 const uint16_t PROGMEM ctrl_super_r[] = { DV_M, MT(MOD_RCTL, DV_Z), COMBO_END };
 
 combo_t key_combos[] = {
-  COMBO(super_l, KC_LGUI),
   COMBO(ctrl_alt_l, LALT(KC_LCTL)),
   COMBO(ctrl_shft_l, LSFT(KC_LCTL)),
   COMBO(ctrl_super_l, LSFT(KC_LGUI)),
   COMBO(alt_super_l, LALT(KC_LGUI)),
 
-  COMBO(super_r, KC_RGUI),
   COMBO(ctrl_alt_r,
         LALT(KC_RCTL) /* use LALT because ralt (altgr) is used for x11's compose key */),
   COMBO(ctrl_shft_r, RSFT(KC_RCTL)),
