@@ -245,6 +245,8 @@ bool rgb_matrix_indicators_user(void)
   return true;
 }
 
+// We only make combos for modifier clusters
+// They are "supposed" to be hit with multiple keys anyway and hence have no complexity overhead.
 const uint16_t PROGMEM ctrl_alt_l[] = { DV_Q, DV_E, COMBO_END };
 const uint16_t PROGMEM ctrl_shft_l[] = { DV_E, MT(MOD_LCTL, DV_SCLN), COMBO_END };
 const uint16_t PROGMEM ctrl_super_l[] = { MT(MOD_LCTL, DV_SCLN), DV_K, COMBO_END };
