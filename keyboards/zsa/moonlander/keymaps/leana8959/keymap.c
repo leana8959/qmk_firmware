@@ -39,8 +39,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,  MT(MOD_LCTL,DV_SCLN),
                            DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    MT(MOD_RCTL,DV_Z),
                                                                                                                                           KC_RSFT,
-        KC_NO,    KC_LGUI, KC_NO,   KC_DOWN, KC_UP,            KC_RALT,          KC_RALT,            KC_LEFT, KC_RIGHT,
-                                                                                                                       KC_NO,   KC_RGUI,  KC_NO,
+        KC_NO,    KC_NO,   KC_NO,   KC_DOWN, MT(MOD_RGUI,KC_UP),
+                                                               KC_RALT,          KC_RALT,            MT(MOD_LGUI,KC_LEFT),
+                                                                                                              KC_RIGHT,
+                                                                                                                       KC_NO,   KC_NO,    KC_NO,
                                              KC_SPC,  DV_GRV,  KC_NO,            KC_NO,
                                                                                             KC_ENT,  KC_BSPC
                                                    // ^ tmux prefix
