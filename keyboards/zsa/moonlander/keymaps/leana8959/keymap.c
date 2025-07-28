@@ -34,15 +34,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         OSL(L_FUNC),
                   DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     DV_EQL,
         DV_BSLS,  DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
-        KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    KC_TAB,           KC_BSPC,   DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     LT(L_SYMB,DV_MINS),
+        KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    KC_TAB,           KC_NO,     DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     LT(L_SYMB,DV_MINS),
         // ^ assume that os mapping sees this as an escape
         KC_LSFT,  MT(MOD_LCTL,DV_SCLN),
                            DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    MT(MOD_RCTL,DV_Z),
                                                                                                                                           KC_RSFT,
-        KC_NO,    KC_LGUI, KC_NO,   KC_DOWN, KC_UP,            KC_RALT,          KC_RALT,             KC_LEFT, KC_RIGHT,
+        KC_NO,    KC_LGUI, KC_NO,   KC_DOWN, KC_UP,            KC_RALT,          KC_RALT,            KC_LEFT, KC_RIGHT,
                                                                                                                        KC_NO,   KC_NO,    KC_NO,
                                              KC_SPC,  DV_GRV,  KC_NO,            KC_NO,
-                                                                                            KC_ENT,  KC_NO
+                                                                                            KC_ENT,  KC_BSPC
                                                    // ^ tmux prefix
     ),
 
