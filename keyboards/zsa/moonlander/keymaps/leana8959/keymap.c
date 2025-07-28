@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,    KC_NO,   KC_NO,   KC_DOWN, KC_UP,            KC_RALT,          KC_RALT,             KC_LEFT, KC_RIGHT,
                                                                                                                        KC_NO,   KC_NO,    DF(L_NATV),
                                              KC_SPC,  DV_GRV,  KC_NO,            KC_NO,
-                                                                                            KC_ENT, KC_NO
+                                                                                            KC_ENT,  KC_RGUI
                                                    // ^ tmux prefix
     ),
 
