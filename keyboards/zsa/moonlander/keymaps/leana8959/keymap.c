@@ -151,7 +151,6 @@ void set_natv_colors(void)
   set_color_row_col(10, 6, 168, 16, 255);
 }
 */
-
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
@@ -168,15 +167,24 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
   }
 }
 
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record)
+{
+  switch (keycode) {
+  case MT(MOD_LCTL, DV_SCLN):
+  case MT(MOD_RCTL, DV_Z):
+    return true;
+
+  default:
+    return true;
+  }
+}
+
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
     // Compromise on ; since its rarely used in a phrase
   case MT(MOD_LCTL, DV_SCLN):
-    if (get_mods() & MOD_MASK_SHIFT) {
-      return false;
-    }
-    return true;
+    return false;
 
     // Rely on flowtap, allow slurring
   case LT(L_SYMB, DV_MINS):
