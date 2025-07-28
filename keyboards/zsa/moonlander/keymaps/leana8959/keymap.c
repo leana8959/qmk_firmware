@@ -24,7 +24,7 @@
 enum layers {
   L_BASE,  // dvorak on qwerty codes
   L_SYMB,  // I like symbols
-  L_NATV,  // native dvorak
+  // L_NATV,  // native dvorak
   L_FUNC,  // function keys
 };
 
@@ -40,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    MT(MOD_RCTL,DV_Z),
                                                                                                                                           KC_RSFT,
         KC_NO,    KC_NO,   KC_NO,   KC_DOWN, KC_UP,            KC_RALT,          KC_RALT,             KC_LEFT, KC_RIGHT,
-                                                                                                                       KC_NO,   KC_NO,    DF(L_NATV),
+                                                                                                                       KC_NO,   KC_NO,    KC_NO,
                                              KC_SPC,  DV_GRV,  KC_NO,            KC_NO,
                                                                                             KC_ENT,  KC_RGUI
                                                    // ^ tmux prefix
@@ -55,6 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                              _______, _______, _______,          _______,  _______, _______
     ),
 
+    /*
     [L_NATV] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, KC_LBRC,          _______,  _______, _______, _______, _______, _______, _______,
         KC_GRV,   KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_RBRC,          _______,  KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
@@ -68,6 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                              _______, _______, OSL(L_FUNC),      OSL(L_FUNC),
                                                                                            _______, _______
     ),
+    */
 
     [L_FUNC] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, DB_TOGG,
@@ -140,6 +142,7 @@ void set_symb_colors(void)
   set_color_row_col(8, 6, 168, 16, 255);
 }
 
+/*
 void set_natv_colors(void)
 {
   // Let color pass through
@@ -147,6 +150,7 @@ void set_natv_colors(void)
   // Go back
   set_color_row_col(10, 6, 168, 16, 255);
 }
+*/
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
 {
@@ -238,9 +242,11 @@ bool rgb_matrix_indicators_user(void)
   case L_SYMB:
     set_symb_colors();
     break;
+    /*
   case L_NATV:
     set_natv_colors();
     break;
+    */
   }
   return true;
 }
