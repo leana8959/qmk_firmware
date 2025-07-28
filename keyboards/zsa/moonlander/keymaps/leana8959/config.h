@@ -31,7 +31,6 @@
 
 // Reduce combo misfire
 #define COMBO_MUST_HOLD_MODS
-#define COMBO_HOLD_TERM        50
 
 #define RGB_MATRIX_STARTUP_SPD 60
 
