@@ -31,16 +31,17 @@ enum layers {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [L_BASE] = LAYOUT(
-        KC_NO,    DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     KC_BSPC,
+        OSL(L_FUNC),
+                  DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     KC_BSPC,
         KC_TAB,   DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
         KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_BSLS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     LT(L_SYMB,DV_MINS),
         // ^ assume that os mapping sees this as an escape
         KC_LSFT,  MT(MOD_LCTL,DV_SCLN),
                            DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    MT(MOD_RCTL,DV_Z),
                                                                                                                                           KC_RSFT,
-        KC_NO,    KC_NO,   KC_NO,   KC_DOWN, KC_UP,            KC_RALT,         KC_RALT,             KC_LEFT, KC_RIGHT,
+        KC_NO,    KC_NO,   KC_NO,   KC_DOWN, KC_UP,            KC_RALT,          KC_RALT,             KC_LEFT, KC_RIGHT,
                                                                                                                        KC_NO,   KC_NO,    DF(L_NATV),
-                                             KC_SPC,  DV_GRV,  OSL(L_FUNC),      OSL(L_FUNC),
+                                             KC_SPC,  DV_GRV,  KC_NO,            KC_NO,
                                                                                             KC_ENT, KC_NO
                                                    // ^ tmux prefix
     ),
@@ -117,8 +118,7 @@ void set_fn_colors(void)
   set_color_row_col(8, 4, 255, 255, 255);
 
   // Go back
-  set_color_row_col(5, 2, 168, 16, 255);
-  set_color_row_col(11, 4, 168, 16, 255);
+  set_color_row_col(0, 0, 168, 16, 255);
 }
 
 void set_symb_colors(void)
