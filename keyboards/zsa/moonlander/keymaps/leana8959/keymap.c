@@ -22,25 +22,23 @@
 #include "print.h"
 
 enum layers {
-  L_BASE,  // dvorak on qwerty codes
-  L_SYMB,  // I like symbols
-  L_FUNC,  // function keys
-
-  // L_NATV,  // native dvorak
+  BASE,
+  SYMBOL,
+  FUNCTION,
 
   // Window manager shortcuts
-  L_XMONAD_JUMP,
-  L_XMONAD_MOVE,
-  L_XMONAD_SWAP,
+  XMONAD_FOCUS_RESIZE,
+  XMONAD_MOVE,
+  XMONAD_SWAP,
 };
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [L_BASE] = LAYOUT(
-        OSL(L_FUNC),
+    [BASE] = LAYOUT(
+        OSL(FUNCTION),
                   DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     DV_BSLS,
         DV_GRV,   DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
-        KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    KC_NO,            DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     LT(L_SYMB,DV_MINS),
+        KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    KC_NO,            DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     LT(SYMBOL,DV_MINS),
         // ^ assume that os mapping sees this as an escape
         KC_LSFT,  LCTL_T(DV_SCLN),
                            DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    RCTL_T(DV_Z),
@@ -48,11 +46,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,    KC_NO,   KC_NO,   KC_DOWN, KC_UP,            KC_RALT,          KC_RALT,            KC_LEFT,
                                                                                                               KC_RIGHT,
                                                                                                                        KC_NO,   KC_NO,    KC_NO,
-                                             KC_SPC,  KC_TAB,  OSL(L_XMONAD_JUMP),
+                                             KC_SPC,  KC_TAB,  OSL(XMONAD_FOCUS_RESIZE),
                                                                                  KC_RGUI,   KC_ENT,  KC_BSPC
     ),
 
-    [L_SYMB] = LAYOUT(
+    [SYMBOL] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, DV_LCBR, DV_RCBR, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, DV_LPRN, DV_RPRN, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
@@ -62,29 +60,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     // Jump to a workspace
-    [L_XMONAD_JUMP] = LAYOUT(
+    [XMONAD_FOCUS_RESIZE] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, LGUI(DV_H),LGUI(DV_T), LGUI(DV_N), LGUI(DV_S), _______,
-        LT(L_XMONAD_MOVE,KC_NO),
-                  LT(L_XMONAD_SWAP,KC_NO),
-                           _______, _______, _______, _______,                             _______, LGUI(DV_M),LGUI(DV_W), LGUI(DV_V), LGUI(DV_Z), _______,
+        _______,  _______, LSG(DV_COMM), LSG(DV_DOT),
+                                             _______, _______, _______,          _______,  _______, LGUI(DV_O), _______, _______, _______, _______,
+        _______,  _______, LGUI(DV_COMM), LGUI(DV_DOT),
+                                             _______, _______, _______,          _______,  _______, LGUI(DV_H),LGUI(DV_T), LGUI(DV_N), LGUI(DV_S), _______,
+        LT(XMONAD_MOVE,KC_NO),
+                  LT(XMONAD_SWAP,KC_NO),
+                           _______, LGUI(DV_J), LGUI(DV_K),
+                                                               _______,          _______,           LGUI(DV_M),LGUI(DV_W), LGUI(DV_V), LGUI(DV_Z), LT(XMONAD_MOVE,KC_NO),
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
                                              _______, _______, _______,          _______,  _______, _______
     ),
 
     // Move focused window to a workspace
-    [L_XMONAD_MOVE] = LAYOUT(
+    [XMONAD_MOVE] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, LAG(DV_H),LAG(DV_T), LAG(DV_N), LAG(DV_S), _______,
-        _______,  _______, _______, _______, _______, _______,                             _______, LAG(DV_M),LAG(DV_W), LAG(DV_V), LAG(DV_Z), _______,
+        _______,  _______, _______, LSG(DV_J), LSG(DV_K), _______,                         _______, LAG(DV_M),LAG(DV_W), LAG(DV_V), LAG(DV_Z), _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
                                              _______, _______, _______,          _______,  _______, _______
     ),
 
     // Swap a target workspace with the current one
-    [L_XMONAD_SWAP] = LAYOUT(
+    [XMONAD_SWAP] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, LCG(DV_H),LCG(DV_T), LCG(DV_N), LCG(DV_S), _______,
@@ -93,23 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                              _______, _______, _______,          _______,  _______, _______
     ),
 
-    /*
-    [L_NATV] = LAYOUT(
-        _______,  _______, _______, _______, _______, _______, KC_LBRC,          _______,  _______, _______, _______, _______, _______, _______,
-        KC_GRV,   KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_RBRC,          _______,  KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
-        KC_ESC,   KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_BSLS,          KC_EQL,   KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_MINS,
-        // ^ assume that we don't have os mapping for this layer                                                                        ^ too lazy to
-        //                                                                                                                                add another layer
-        _______,  MT(MOD_LCTL,KC_SCLN),
-                           KC_Q,    KC_J,    KC_K,    KC_X,                                KC_B,    KC_M,    KC_W,    KC_V,    MT(MOD_RCTL,KC_Z),
-                                                                                                                                        _______,
-        _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, DF(L_BASE),
-                                             _______, _______, OSL(L_FUNC),      OSL(L_FUNC),
-                                                                                           _______, _______
-    ),
-    */
-
-    [L_FUNC] = LAYOUT(
+    [FUNCTION] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, DB_TOGG,
         _______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______,  KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
         _______,  _______, _______, _______, _______, KC_F6,   _______,          _______,  KC_F7,   KC_MEDIA_PREV_TRACK,
@@ -120,8 +105,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
                                              _______, _______, _______,          DT_PRNT,  DT_DOWN, DT_UP
     ),
-
-
 };
 // clang-format on
 
@@ -180,15 +163,6 @@ void set_symb_colors(void)
   set_color_row_col(8, 6, 168, 16, 255);
 }
 
-/*
-void set_natv_colors(void)
-{
-  // Let color pass through
-
-  // Go back
-  set_color_row_col(10, 6, 168, 16, 255);
-}
-*/
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
@@ -250,17 +224,12 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record,
 bool rgb_matrix_indicators_user(void)
 {
   switch (get_highest_layer(default_layer_state | layer_state)) {
-  case L_FUNC:
+  case FUNCTION:
     set_fn_colors();
     break;
-  case L_SYMB:
+  case SYMBOL:
     set_symb_colors();
     break;
-    /*
-  case L_NATV:
-    set_natv_colors();
-    break;
-    */
   }
   return true;
 }
