@@ -182,22 +182,12 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record)
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
-    // Compromise on ; since its rarely used in a phrase
-  case MT(MOD_LCTL, DV_SCLN):
-    return false;
-
-    // Rely on flowtap, allow slurring
-  case LT(L_SYMB, DV_MINS):
-    return true;
-
-  case MT(MOD_RCTL, DV_Z):
-    if (get_mods() & MOD_MASK_SHIFT) {
-      return false;
-    }
+  case MT(MOD_RGUI, KC_UP):
+  case MT(MOD_LGUI, KC_LEFT):
     return true;
 
   default:
-    return true;
+    return false;
   }
 }
 
