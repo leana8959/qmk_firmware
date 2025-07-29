@@ -103,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                                                                                _______, _______,
         _______,  _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
-                                             _______, _______, _______,          DT_PRNT,  DT_DOWN, DT_UP
+                                             _______, _______, _______,          _______,  _______, _______
     ),
 };
 // clang-format on
@@ -163,26 +163,14 @@ void set_symb_colors(void)
   set_color_row_col(8, 6, 168, 16, 255);
 }
 
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
-{
-  switch (keycode) {
-  case MT(MOD_LCTL, DV_SCLN):
-    // Wait for a long time if shift is held
-    // This would effecitvely allow `:` to be triggered correctly
-    if (get_mods() & MOD_MASK_SHIFT) {
-      return g_tapping_term + 500;
-    }
-    return g_tapping_term;
-
-  default:
-    return g_tapping_term;
-  }
-}
-
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
   case MT(MOD_LCTL, DV_SCLN):
+    if (get_mods() & MOD_MASK_SHIFT) {
+      return false;
+    }
+    return true;
   case MT(MOD_RCTL, DV_Z):
     return true;
 
@@ -201,24 +189,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
   default:
     return false;
   }
-}
-
-bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record,
-                      uint16_t other_keycode, keyrecord_t *other_record)
-{
-  switch (tap_hold_keycode) {
-    // Page up page down
-  case LCTL_T(DV_SCLN):
-  case RCTL_T(DV_Z):
-    switch (other_keycode) {
-    case DV_U:
-    case DV_D:
-      return true;
-    }
-    break;
-  }
-
-  return get_chordal_hold_default(tap_hold_record, other_record);
 }
 
 bool rgb_matrix_indicators_user(void)

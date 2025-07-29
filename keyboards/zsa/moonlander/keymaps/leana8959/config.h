@@ -25,15 +25,11 @@
 // Allow maximum 8 layers
 #define LAYER_STATE_8BIT
 
-#define TAPPING_TERM 160
-#define TAPPING_TERM_PER_KEY
+#define TAPPING_TERM 200
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
 // Reduce combo misfire
 #define COMBO_MUST_HOLD_MODS
-
-// Allow dropping the tapping term while ignoring some chords
-#define CHORDAL_HOLD
 
 #define RGB_MATRIX_STARTUP_SPD 60
 
