@@ -25,11 +25,6 @@ enum layers {
   BASE,
   SYMBOL,
   FUNCTION,
-
-  // Window manager shortcuts
-  XMONAD_FOCUS_RESIZE,
-  XMONAD_MOVE,
-  XMONAD_SWAP,
 };
 
 // clang-format off
@@ -43,11 +38,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,  LCTL_T(DV_SCLN),
                            DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    RCTL_T(DV_Z),
                                                                                                                                           KC_RSFT,
-        _______,  KC_NO,   KC_NO,   KC_DOWN, KC_UP,            KC_RALT,          KC_RALT,   KC_LEFT,
+        _______,  KC_NO,   KC_NO,   KC_DOWN, LGUI_T(KC_UP),    KC_RALT,          KC_RALT,            RGUI_T(KC_LEFT),
                                                                                                               KC_RIGHT,
                                                                                                                        KC_NO,   KC_NO,    _______,
-                                             LT(XMONAD_FOCUS_RESIZE,KC_SPC),
-                                                      KC_TAB,  _______,          _______,   KC_ENT,  KC_BSPC
+                                             KC_SPC,  KC_TAB,  _______,          _______,   KC_ENT,  KC_BSPC
     ),
 
     [SYMBOL] = LAYOUT(
@@ -55,41 +49,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______, _______, DV_LCBR, DV_RCBR, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, DV_LPRN, DV_RPRN, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, DV_LBRC, DV_RBRC, _______,                             _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
-                                             _______, _______, _______,          _______,  _______, _______
-    ),
-
-    // Jump to a workspace
-    [XMONAD_FOCUS_RESIZE] = LAYOUT(
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, LSG(DV_COMM), LSG(DV_DOT),
-                                             _______, _______, _______,          _______,  _______, LGUI(DV_O), _______, _______, _______, _______,
-        _______,  _______, LGUI(DV_COMM), LGUI(DV_DOT),
-                                             _______, _______, _______,          _______,  _______, LGUI(DV_H),LGUI(DV_T), LGUI(DV_N), LGUI(DV_S), _______,
-        LT(XMONAD_MOVE,KC_NO),
-                  LT(XMONAD_SWAP,KC_NO),
-                           _______, LGUI(DV_J), LGUI(DV_K),
-                                                               _______,          _______,           LGUI(DV_M),LGUI(DV_W), LGUI(DV_V), LGUI(DV_Z), LT(XMONAD_MOVE,KC_NO),
-        _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
-                                             _______, _______, _______,          _______,  LSG(KC_ENTER), _______
-    ),
-
-    // Move focused window to a workspace
-    [XMONAD_MOVE] = LAYOUT(
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, LSG(DV_C), _______, _______, _______,
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, LAG(DV_H),LAG(DV_T), LAG(DV_N), LAG(DV_S), _______,
-        _______,  _______, _______, LSG(DV_J), LSG(DV_K), _______,                         _______, LAG(DV_M),LAG(DV_W), LAG(DV_V), LAG(DV_Z), _______,
-        _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
-                                             _______, _______, _______,          _______,  _______, _______
-    ),
-
-    // Swap a target workspace with the current one
-    [XMONAD_SWAP] = LAYOUT(
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, LCG(DV_H),LCG(DV_T), LCG(DV_N), LCG(DV_S), _______,
-        _______,  _______, _______, _______, _______, _______,                             _______, LCG(DV_M),LCG(DV_W), LCG(DV_V), LCG(DV_Z), _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
                                              _______, _______, _______,          _______,  _______, _______
     ),
@@ -174,9 +133,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record)
   case MT(MOD_RCTL, DV_Z):
     return true;
 
-  case LT(XMONAD_FOCUS_RESIZE, KC_SPC):
-    return false;
-
   default:
     return true;
   }
@@ -211,18 +167,23 @@ bool rgb_matrix_indicators_user(void)
 // They are "supposed" to be hit with multiple keys anyway and hence have no complexity overhead.
 const uint16_t PROGMEM ctrl_alt_l[] = { DV_Q, DV_E, COMBO_END };
 const uint16_t PROGMEM ctrl_shft_l[] = { DV_E, MT(MOD_LCTL, DV_SCLN), COMBO_END };
+const uint16_t PROGMEM ctrl_super_l[] = { MT(MOD_LCTL, DV_SCLN), DV_K, COMBO_END };
+const uint16_t PROGMEM alt_super_l[] = { DV_O, DV_K, COMBO_END };
 
 const uint16_t PROGMEM ctrl_alt_r[] = { DV_T, DV_V, COMBO_END };
 const uint16_t PROGMEM ctrl_shft_r[] = { DV_T, MT(MOD_RCTL, DV_Z), COMBO_END };
+const uint16_t PROGMEM ctrl_super_r[] = { DV_M, MT(MOD_RCTL, DV_Z), COMBO_END };
 
 combo_t key_combos[] = {
-  // XMonad float
   COMBO(ctrl_alt_l, LALT(KC_LCTL)),
-  COMBO(ctrl_alt_r, LALT(KC_RCTL)),  // use LALT because ralt (altgr) is used for x11's compose key
-
-  // Browser stuff
-  COMBO(ctrl_shft_r, LSFT(KC_RCTL)),
   COMBO(ctrl_shft_l, LSFT(KC_LCTL)),
+  COMBO(ctrl_super_l, LSFT(KC_LGUI)),
+  COMBO(alt_super_l, LALT(KC_LGUI)),
+
+  COMBO(ctrl_alt_r,
+        LALT(KC_RCTL) /* use LALT because ralt (altgr) is used for x11's compose key */),
+  COMBO(ctrl_shft_r, RSFT(KC_RCTL)),
+  COMBO(ctrl_super_r, RSFT(KC_RGUI)),
 };
 
 void keyboard_post_init_user(void)
