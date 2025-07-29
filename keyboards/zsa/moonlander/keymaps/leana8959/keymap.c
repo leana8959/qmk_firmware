@@ -191,6 +191,24 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
   }
 }
 
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record,
+                      uint16_t other_keycode, keyrecord_t *other_record)
+{
+  switch (tap_hold_keycode) {
+    // Page up page down
+  case MT(MOD_LCTL, DV_SCLN):
+  case MT(MOD_RCTL, DV_Z):
+    switch (other_keycode) {
+    case DV_U:
+    case DV_D:
+      return true;
+    }
+    break;
+  }
+
+  return get_chordal_hold_default(tap_hold_record, other_record);
+}
+
 bool rgb_matrix_indicators_user(void)
 {
   switch (get_highest_layer(default_layer_state | layer_state)) {
