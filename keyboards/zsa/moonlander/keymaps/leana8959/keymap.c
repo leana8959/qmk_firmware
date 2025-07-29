@@ -71,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            _______, LGUI(DV_J), LGUI(DV_K),
                                                                _______,          _______,           LGUI(DV_M),LGUI(DV_W), LGUI(DV_V), LGUI(DV_Z), LT(XMONAD_MOVE,KC_NO),
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
-                                             _______, _______, _______,          _______,  _______, _______
+                                             _______, _______, _______,          _______,  LSG(KC_ENTER), _______
     ),
 
     // Move focused window to a workspace
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, LAG(DV_H),LAG(DV_T), LAG(DV_N), LAG(DV_S), _______,
         _______,  _______, _______, LSG(DV_J), LSG(DV_K), _______,                         _______, LAG(DV_M),LAG(DV_W), LAG(DV_V), LAG(DV_Z), _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
-                                             _______, _______, _______,          _______,  LSG(KC_ENTER), _______
+                                             _______, _______, _______,          _______,  _______, _______
     ),
 
     // Swap a target workspace with the current one
