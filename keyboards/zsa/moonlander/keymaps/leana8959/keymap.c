@@ -125,11 +125,13 @@ void set_symb_colors(void)
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
+  case LT(SYMBOL, DV_MINS):
   case MT(MOD_LCTL, DV_SCLN):
     if (get_mods() & MOD_MASK_SHIFT) {
       return false;
     }
     return true;
+
   case MT(MOD_RCTL, DV_Z):
     return true;
 
