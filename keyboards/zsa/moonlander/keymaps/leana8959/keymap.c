@@ -183,8 +183,7 @@ combo_t key_combos[] = {
   COMBO(alt_super_l, OS_LAG),
 
   COMBO(super_r, OS_RGUI),
-  COMBO(ctrl_alt_r, OSM(MOD_LALT /* use LALT because ralt (altgr) is used for x11's compose key */
-                        | MOD_RCTL)),
+  COMBO(ctrl_alt_r, OS_LCA), // For some reason RCA doesn't work 🤔
   COMBO(ctrl_shft_r, OS_RCS),
   COMBO(shift_super_r, OS_RSG),
 };
