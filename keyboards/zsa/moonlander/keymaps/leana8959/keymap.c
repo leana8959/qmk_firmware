@@ -36,8 +36,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         DV_GRV,   DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
         KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_BSLS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     LT(L_SYMB,DV_MINS),
         // ^ assume that os mapping sees this as an escape
-        KC_LSFT,  MT(MOD_LCTL,DV_SCLN),
-                           DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    MT(MOD_RCTL,DV_Z),
+        KC_LSFT,  LCTL_T(DV_SCLN),
+                           DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    RCTL_T(DV_Z),
                                                                                                                                           KC_RSFT,
         KC_NO,    KC_NO,   KC_NO,   KC_DOWN, MT(MOD_LGUI,KC_UP),
                                                                KC_RALT,          KC_RALT,            MT(MOD_RGUI,KC_LEFT),
@@ -196,8 +196,8 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record,
 {
   switch (tap_hold_keycode) {
     // Page up page down
-  case MT(MOD_LCTL, DV_SCLN):
-  case MT(MOD_RCTL, DV_Z):
+  case LCTL_T(DV_SCLN):
+  case RCTL_T(DV_Z):
     switch (other_keycode) {
     case DV_U:
     case DV_D:
