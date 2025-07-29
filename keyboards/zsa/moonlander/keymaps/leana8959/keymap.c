@@ -38,8 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,  LCTL_T(DV_SCLN),
                            DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    RCTL_T(DV_Z),
                                                                                                                                           KC_RSFT,
-        _______,  KC_NO,   KC_NO,   KC_DOWN, LGUI_T(KC_UP),    KC_RALT,          KC_RALT,            RGUI_T(KC_LEFT),
-                                                                                                              KC_RIGHT,
+        _______,  KC_NO,   KC_NO,   KC_DOWN, KC_UP,            KC_RALT,          KC_RALT,            KC_LEFT, KC_RIGHT,
                                                                                                                        KC_NO,   KC_NO,    _______,
                                              KC_SPC,  KC_TAB,  _______,          _______,   KC_ENT,  KC_BSPC
     ),
@@ -165,27 +164,29 @@ bool rgb_matrix_indicators_user(void)
   return true;
 }
 
-// We only make combos for modifier clusters
-// They are "supposed" to be hit with multiple keys anyway and hence have no complexity overhead.
+const uint16_t PROGMEM super_l[] = { DV_E, DV_K, COMBO_END };
 const uint16_t PROGMEM ctrl_alt_l[] = { DV_Q, DV_E, COMBO_END };
-const uint16_t PROGMEM ctrl_shft_l[] = { DV_E, MT(MOD_LCTL, DV_SCLN), COMBO_END };
-const uint16_t PROGMEM ctrl_super_l[] = { MT(MOD_LCTL, DV_SCLN), DV_K, COMBO_END };
+const uint16_t PROGMEM ctrl_shft_l[] = { DV_E, LCTL_T(DV_SCLN), COMBO_END };
+const uint16_t PROGMEM shift_super_l[] = { LCTL_T(DV_SCLN), DV_K, COMBO_END };
 const uint16_t PROGMEM alt_super_l[] = { DV_O, DV_K, COMBO_END };
 
+const uint16_t PROGMEM super_r[] = { DV_M, DV_T, COMBO_END };
 const uint16_t PROGMEM ctrl_alt_r[] = { DV_T, DV_V, COMBO_END };
-const uint16_t PROGMEM ctrl_shft_r[] = { DV_T, MT(MOD_RCTL, DV_Z), COMBO_END };
-const uint16_t PROGMEM ctrl_super_r[] = { DV_M, MT(MOD_RCTL, DV_Z), COMBO_END };
+const uint16_t PROGMEM ctrl_shft_r[] = { DV_T, RCTL_T(DV_Z), COMBO_END };
+const uint16_t PROGMEM shift_super_r[] = { DV_M, RCTL_T(DV_Z), COMBO_END };
 
 combo_t key_combos[] = {
-  COMBO(ctrl_alt_l, LALT(KC_LCTL)),
-  COMBO(ctrl_shft_l, LSFT(KC_LCTL)),
-  COMBO(ctrl_super_l, LSFT(KC_LGUI)),
-  COMBO(alt_super_l, LALT(KC_LGUI)),
+  COMBO(super_l, OS_LGUI),
+  COMBO(ctrl_alt_l, OS_LCA),
+  COMBO(ctrl_shft_l, OS_LCS),
+  COMBO(shift_super_l, OS_LSG),
+  COMBO(alt_super_l, OS_LAG),
 
-  COMBO(ctrl_alt_r,
-        LALT(KC_RCTL) /* use LALT because ralt (altgr) is used for x11's compose key */),
-  COMBO(ctrl_shft_r, RSFT(KC_RCTL)),
-  COMBO(ctrl_super_r, RSFT(KC_RGUI)),
+  COMBO(super_r, OS_RGUI),
+  COMBO(ctrl_alt_r, OSM(MOD_LALT /* use LALT because ralt (altgr) is used for x11's compose key */
+                        | MOD_RCTL)),
+  COMBO(ctrl_shft_r, OS_RCS),
+  COMBO(shift_super_r, OS_RSG),
 };
 
 void keyboard_post_init_user(void)
