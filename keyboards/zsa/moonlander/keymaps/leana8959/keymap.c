@@ -201,46 +201,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
   }
 }
 
-bool is_flow_tap_key(uint16_t keycode)
-{
-  if ((get_mods() & (MOD_MASK_CG | MOD_BIT_LALT)) != 0) {
-    return false;  // Disable Flow Tap on hotkeys.
-  }
-  switch (get_tap_keycode(keycode)) {
-  case KC_SPC:
-  case KC_A ... KC_Z:
-  case KC_DOT:
-  case KC_COMM:
-  case KC_SCLN:
-  case KC_SLSH:
-    return true;
-
-    // customizations
-  case DV_MINS:  // For the enclosing symbol toggle
-    return true;
-  }
-  return false;
-}
-
-uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_keycode)
-{
-  if (!is_flow_tap_key(keycode) || !is_flow_tap_key(prev_keycode)) {
-    return 0;
-  }
-
-  switch (keycode) {
-  // turn this off, high error rate
-  case MT(MOD_LCTL, DV_SCLN):
-    return 0;
-
-  case LT(L_SYMB, DV_MINS):
-    return FLOW_TAP_TERM - 40;
-
-  default:
-    return FLOW_TAP_TERM;
-  }
-}
-
 bool rgb_matrix_indicators_user(void)
 {
   switch (get_highest_layer(default_layer_state | layer_state)) {
