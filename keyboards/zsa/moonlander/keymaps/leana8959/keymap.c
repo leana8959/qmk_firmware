@@ -80,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                                                                                _______, _______,
         _______,  _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
-                                             _______, _______, _______,          _______,  _______, _______
+                                             _______, _______, _______,          DT_PRNT,  DT_DOWN, DT_UP
     ),
 
 
@@ -158,12 +158,12 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
     // Wait for a long time if shift is held
     // This would effecitvely allow `:` to be triggered correctly
     if (get_mods() & MOD_MASK_SHIFT) {
-      return TAPPING_TERM + 500;
+      return g_tapping_term + 500;
     }
-    return TAPPING_TERM;
+    return g_tapping_term;
 
   default:
-    return TAPPING_TERM;
+    return g_tapping_term;
   }
 }
 
