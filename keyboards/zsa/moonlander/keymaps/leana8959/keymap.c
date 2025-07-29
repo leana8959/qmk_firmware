@@ -43,11 +43,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,  LCTL_T(DV_SCLN),
                            DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    RCTL_T(DV_Z),
                                                                                                                                           KC_RSFT,
-        OSL(XMONAD_FOCUS_RESIZE),
-                  KC_NO,   KC_NO,   KC_DOWN, KC_UP,            KC_RALT,          KC_RALT,   KC_LEFT,
+        _______,  KC_NO,   KC_NO,   KC_DOWN, KC_UP,            KC_RALT,          KC_RALT,   KC_LEFT,
                                                                                                               KC_RIGHT,
-                                                                                                                       KC_NO,   KC_NO,    OSM(MOD_RGUI),
-                                             KC_SPC,  KC_TAB,  _______,          _______,   KC_ENT,  KC_BSPC
+                                                                                                                       KC_NO,   KC_NO,    _______,
+                                             LT(XMONAD_FOCUS_RESIZE,KC_SPC),
+                                                      KC_TAB,  _______,          _______,   KC_ENT,  KC_BSPC
     ),
 
     [SYMBOL] = LAYOUT(
@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [XMONAD_FOCUS_RESIZE] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  _______, LSG(DV_COMM), LSG(DV_DOT),
-                                             _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+                                             _______, _______, _______,          _______,  _______, LGUI(DV_O), _______, _______, _______, _______,
         _______,  _______, LGUI(DV_COMM), LGUI(DV_DOT),
                                              _______, _______, _______,          _______,  _______, LGUI(DV_H),LGUI(DV_T), LGUI(DV_N), LGUI(DV_S), _______,
         LT(XMONAD_MOVE,KC_NO),
@@ -173,6 +173,9 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record)
     return true;
   case MT(MOD_RCTL, DV_Z):
     return true;
+
+  case LT(XMONAD_FOCUS_RESIZE, KC_SPC):
+    return false;
 
   default:
     return true;
