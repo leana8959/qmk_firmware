@@ -25,7 +25,8 @@
 // Allow maximum 8 layers
 #define LAYER_STATE_8BIT
 
-#define TAPPING_TERM 165
+#define TAPPING_TERM 140
+#define TAPPING_TERM_PER_KEY
 
 // Reduce combo misfire
 #define COMBO_MUST_HOLD_MODS

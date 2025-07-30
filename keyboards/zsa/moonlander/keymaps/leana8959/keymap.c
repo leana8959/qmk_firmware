@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                                                                                _______, _______,
         _______,  _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
-                                             _______, _______, _______,          _______,  _______, _______
+                                             _______, _______, _______,          DT_PRNT,  DT_DOWN, DT_UP
     ),
 };
 // clang-format on
@@ -121,6 +121,16 @@ void set_symb_colors(void)
   set_color_row_col(8, 6, 168, 16, 255);
 }
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
+{
+  switch (keycode) {
+  case LT(SYMBOL, DV_MINS):
+    return g_tapping_term - 15;
+  default:
+    return g_tapping_term;
+  }
+}
+
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record)
 {
   switch (keycode) {
@@ -164,16 +174,11 @@ const uint16_t PROGMEM ctrl_shft_r[] = { DV_T, RCTL_T(DV_Z), COMBO_END };
 const uint16_t PROGMEM shift_super_r[] = { DV_M, RCTL_T(DV_Z), COMBO_END };
 
 combo_t key_combos[] = {
-  COMBO(super_l, OS_LGUI),
-  COMBO(ctrl_alt_l, OS_LCA),
-  COMBO(ctrl_shft_l, OS_LCS),
-  COMBO(shift_super_l, OS_LSG),
-  COMBO(alt_super_l, OS_LAG),
+  COMBO(super_l, OS_LGUI),      COMBO(ctrl_alt_l, OS_LCA),    COMBO(ctrl_shft_l, OS_LCS),
+  COMBO(shift_super_l, OS_LSG), COMBO(alt_super_l, OS_LAG),
 
-  COMBO(super_r, OS_RGUI),
-  COMBO(ctrl_alt_r, OS_LCA), // For some reason RCA doesn't work 🤔
-  COMBO(ctrl_shft_r, OS_RCS),
-  COMBO(shift_super_r, OS_RSG),
+  COMBO(super_r, OS_RGUI),      COMBO(ctrl_alt_r, OS_LCA),  // For some reason RCA doesn't work 🤔
+  COMBO(ctrl_shft_r, OS_RCS),   COMBO(shift_super_r, OS_RSG),
 };
 
 void keyboard_post_init_user(void)
