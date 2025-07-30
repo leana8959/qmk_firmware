@@ -31,8 +31,6 @@
 // Reduce combo misfire
 #define COMBO_MUST_HOLD_MODS
 
-#define RGB_MATRIX_STARTUP_SPD 60
-
 // Only enable the heatmap effect
 #undef ENABLE_RGB_MATRIX_ALPHAS_MODS
 #undef ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN
