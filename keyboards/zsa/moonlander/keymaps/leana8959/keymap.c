@@ -164,13 +164,13 @@ bool rgb_matrix_indicators_user(void)
   return true;
 }
 
-const uint16_t PROGMEM super_l[] = { DV_Q, DV_K, COMBO_END };
+const uint16_t PROGMEM super_l[] = { DV_E, DV_K, COMBO_END };
 const uint16_t PROGMEM ctrl_alt_l[] = { DV_Q, DV_E, COMBO_END };
 const uint16_t PROGMEM ctrl_shft_l[] = { DV_E, LCTL_T(DV_SCLN), COMBO_END };
 const uint16_t PROGMEM shift_super_l[] = { LCTL_T(DV_SCLN), DV_K, COMBO_END };
 const uint16_t PROGMEM alt_super_l[] = { DV_O, DV_K, COMBO_END };
 
-const uint16_t PROGMEM super_r[] = { DV_M, DV_V, COMBO_END };
+const uint16_t PROGMEM super_r[] = { DV_M, DV_T, COMBO_END };
 const uint16_t PROGMEM ctrl_alt_r[] = { DV_T, DV_V, COMBO_END };
 const uint16_t PROGMEM ctrl_shft_r[] = { DV_T, RCTL_T(DV_Z), COMBO_END };
 const uint16_t PROGMEM shift_super_r[] = { DV_M, RCTL_T(DV_Z), COMBO_END };
