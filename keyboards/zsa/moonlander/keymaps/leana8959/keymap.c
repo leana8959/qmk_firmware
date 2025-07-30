@@ -126,6 +126,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
   switch (keycode) {
   case LT(SYMBOL, DV_MINS):
     return g_tapping_term - 15;
+  case LCTL_T(DV_SCLN):
+    return g_tapping_term + 15;
+
   default:
     return g_tapping_term;
   }
