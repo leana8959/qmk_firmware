@@ -30,6 +30,7 @@
 // Reduce combo misfire
 #define COMBO_MUST_HOLD_MODS
 #define COMBO_TERM 20
+#define COMBO_TERM_PER_COMBO
 
 // Only enable the heatmap effect
 #undef ENABLE_RGB_MATRIX_ALPHAS_MODS

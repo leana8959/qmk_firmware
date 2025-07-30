@@ -171,6 +171,17 @@ combo_t key_combos[] = {
   COMBO(ctrl_shft_r, OS_RCS),   COMBO(shift_super_r, OS_RSG),
 };
 
+uint16_t get_combo_term(uint16_t combo_index, combo_t *combo)
+{
+  switch (combo->keycode) {
+  case OS_LSG:
+  case OS_RSG:
+    return COMBO_TERM + 20;
+  default:
+    return COMBO_TERM;
+  }
+}
+
 void keyboard_post_init_user(void)
 {
   rgb_matrix_mode_noeeprom(RGB_MATRIX_TYPING_HEATMAP);
