@@ -22,15 +22,10 @@
 #define MOONLANDER_USER_LEDS
 #define CAPS_LOCK_STATUS
 
+#define HOLD_ON_OTHER_KEY_PRESS
+
 // Allow maximum 8 layers
 #define LAYER_STATE_8BIT
-
-#define TAPPING_TERM 160
-
-// Reduce combo misfire
-#define COMBO_MUST_HOLD_MODS
-#define COMBO_TERM 20
-#define COMBO_TERM_PER_COMBO
 
 // Only enable the heatmap effect
 #undef ENABLE_RGB_MATRIX_ALPHAS_MODS

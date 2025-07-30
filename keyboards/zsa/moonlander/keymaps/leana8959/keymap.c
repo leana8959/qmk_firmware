@@ -33,20 +33,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         OSL(FUNCTION),
                   DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    KC_BRIU,          KC_VOLU,   DV_6,    DV_7,    DV_8,    DV_9,    DV_0,     KC_NO,
         DV_GRV,   DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
-        KC_CAPS,  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    DV_BSLS,          DV_EQL,    DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     LT(SYMBOL,DV_MINS),
-        // ^ assume that os mapping sees this as an escape
-        KC_LSFT,  LCTL_T(DV_SCLN),
-                           DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    RCTL_T(DV_Z),
-                                                                                                                                          KC_RSFT,
-        _______,  KC_NO,   KC_NO,   KC_DOWN, KC_UP,            KC_RALT,          KC_RALT,            KC_LEFT, KC_RIGHT,
-                                                                                                                       KC_NO,   KC_NO,    _______,
-                                             KC_SPC,  KC_TAB,  _______,          _______,   KC_ENT,  KC_BSPC
+        KC_CAPS,
+        //  ^ assume that os mapping sees this as an escape
+                  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    KC_RALT,          KC_RALT,   DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     OSL(SYMBOL),
+        KC_LSFT,  DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     KC_RSFT,
+        _______,  KC_LSFT, KC_LCTL, LALT_T(KC_DOWN),
+                                             LGUI_T(KC_UP),    KC_RALT,          KC_RALT,            RGUI_T(KC_LEFT),
+                                                                                                            LALT_T(KC_RIGHT),
+                                                                                                                       KC_RCTL, KC_RSFT,  _______,
+                                             KC_SPC,  KC_TAB,  _______,          _______,   KC_ENTER,KC_BSPC
     ),
 
     [SYMBOL] = LAYOUT(
         _______,  _______, _______, _______, _______, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, DV_LCBR, DV_RCBR, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
-        _______,  _______, _______, DV_LPRN, DV_RPRN, _______, _______,          _______,  _______, _______, _______, _______, _______, _______,
+        _______,  _______, _______, DV_LPRN, DV_RPRN, _______, _______,          _______,  _______, DV_EQL,  DV_MINS, DV_BSLS, _______, _______,
         _______,  _______, _______, DV_LBRC, DV_RBRC, _______,                             _______, _______, _______, _______, _______, _______,
         _______,  _______, _______, _______, _______,          _______,          _______,           _______, _______, _______, _______, _______,
                                              _______, _______, _______,          _______,  _______, _______
@@ -121,24 +122,6 @@ void set_symb_colors(void)
   set_color_row_col(8, 6, 168, 16, 255);
 }
 
-bool get_permissive_hold(uint16_t keycode, keyrecord_t *record)
-{
-  switch (keycode) {
-  case LT(SYMBOL, DV_MINS):
-  case MT(MOD_LCTL, DV_SCLN):
-    if (get_mods() & MOD_MASK_SHIFT) {
-      return false;
-    }
-    return true;
-
-  case MT(MOD_RCTL, DV_Z):
-    return true;
-
-  default:
-    return true;
-  }
-}
-
 bool rgb_matrix_indicators_user(void)
 {
   switch (get_highest_layer(default_layer_state | layer_state)) {
@@ -150,36 +133,6 @@ bool rgb_matrix_indicators_user(void)
     break;
   }
   return true;
-}
-
-const uint16_t PROGMEM super_l[] = { DV_E, DV_K, COMBO_END };
-const uint16_t PROGMEM ctrl_alt_l[] = { DV_Q, DV_E, COMBO_END };
-const uint16_t PROGMEM ctrl_shft_l[] = { DV_E, LCTL_T(DV_SCLN), COMBO_END };
-const uint16_t PROGMEM shift_super_l[] = { LCTL_T(DV_SCLN), DV_K, COMBO_END };
-const uint16_t PROGMEM alt_super_l[] = { DV_O, DV_K, COMBO_END };
-
-const uint16_t PROGMEM super_r[] = { DV_M, DV_T, COMBO_END };
-const uint16_t PROGMEM ctrl_alt_r[] = { DV_T, DV_V, COMBO_END };
-const uint16_t PROGMEM ctrl_shft_r[] = { DV_T, RCTL_T(DV_Z), COMBO_END };
-const uint16_t PROGMEM shift_super_r[] = { DV_M, RCTL_T(DV_Z), COMBO_END };
-
-combo_t key_combos[] = {
-  COMBO(super_l, OS_LGUI),      COMBO(ctrl_alt_l, OS_LCA),    COMBO(ctrl_shft_l, OS_LCS),
-  COMBO(shift_super_l, OS_LSG), COMBO(alt_super_l, OS_LAG),
-
-  COMBO(super_r, OS_RGUI),      COMBO(ctrl_alt_r, OS_LCA),  // For some reason RCA doesn't work 🤔
-  COMBO(ctrl_shft_r, OS_RCS),   COMBO(shift_super_r, OS_RSG),
-};
-
-uint16_t get_combo_term(uint16_t combo_index, combo_t *combo)
-{
-  switch (combo->keycode) {
-  case OS_LSG:
-  case OS_RSG:
-    return COMBO_TERM + 20;
-  default:
-    return COMBO_TERM;
-  }
 }
 
 void keyboard_post_init_user(void)
