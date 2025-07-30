@@ -26,7 +26,6 @@
 #define LAYER_STATE_8BIT
 
 #define TAPPING_TERM 165
-#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
 // Reduce combo misfire
 #define COMBO_MUST_HOLD_MODS

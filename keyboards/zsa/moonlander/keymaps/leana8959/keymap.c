@@ -139,18 +139,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record)
   }
 }
 
-bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
-{
-  switch (keycode) {
-  case MT(MOD_RGUI, KC_UP):
-  case MT(MOD_LGUI, KC_LEFT):
-    return true;
-
-  default:
-    return false;
-  }
-}
-
 bool rgb_matrix_indicators_user(void)
 {
   switch (get_highest_layer(default_layer_state | layer_state)) {
