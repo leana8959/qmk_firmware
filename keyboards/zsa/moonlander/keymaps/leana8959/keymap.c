@@ -118,6 +118,10 @@ void set_symb_colors(void)
   set_color_row_col(3, 3, 15, 208, 255);
   set_color_row_col(3, 4, 15, 208, 255);
 
+  set_color_row_col(8, 2, 15, 208, 255);
+  set_color_row_col(8, 3, 15, 208, 255);
+  set_color_row_col(8, 4, 15, 208, 255);
+
   // Go back
   set_color_row_col(8, 6, 168, 16, 255);
 }
