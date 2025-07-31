@@ -77,5 +77,5 @@
 # define STARTUP_SONG SONG(E__NOTE(_E5), E__NOTE(_A5), ED_NOTE(_E6))
 #endif
 
-#define set_color_row_col(row, col, r, g, b) \
-  rgb_matrix_set_color(g_led_config.matrix_co[row][col], r, g, b)
+#define MY_RGB_CYAN   15, 208, 255
+#define MY_RGB_PURPLE 168, 16, 255

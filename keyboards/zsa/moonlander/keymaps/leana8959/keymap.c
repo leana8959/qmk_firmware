@@ -72,71 +72,35 @@ const key_override_t *key_overrides[] = {
   &ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_BSPC, KC_DEL, ~0, MOD_MASK_CAG),
 };
 
-void set_fn_colors(void)
-{
-  // Disable pass through
-  for (uint8_t i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
-    rgb_matrix_set_color(i, 0, 0, 0);
-  }
-
-  // Function keys
-  set_color_row_col(1, 1, 15, 208, 255);
-  set_color_row_col(1, 2, 15, 208, 255);
-  set_color_row_col(1, 3, 15, 208, 255);
-  set_color_row_col(1, 4, 15, 208, 255);
-  set_color_row_col(1, 5, 15, 208, 255);
-  set_color_row_col(2, 5, 15, 208, 255);
-
-  set_color_row_col(8, 1, 15, 208, 255);
-  set_color_row_col(7, 1, 15, 208, 255);
-  set_color_row_col(7, 2, 15, 208, 255);
-  set_color_row_col(7, 3, 15, 208, 255);
-  set_color_row_col(7, 4, 15, 208, 255);
-  set_color_row_col(7, 5, 15, 208, 255);
-
-  // Music keys
-  set_color_row_col(8, 2, 255, 255, 255);
-  set_color_row_col(8, 3, 255, 255, 255);
-  set_color_row_col(8, 4, 255, 255, 255);
-
-  // Go back
-  set_color_row_col(0, 0, 168, 16, 255);
-}
-
-void set_symb_colors(void)
-{
-  // Disable pass through
-  for (uint8_t i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
-    rgb_matrix_set_color(i, 0, 0, 0);
-  }
-
-  // Symbols
-  set_color_row_col(1, 3, 15, 208, 255);
-  set_color_row_col(1, 4, 15, 208, 255);
-  set_color_row_col(2, 3, 15, 208, 255);
-  set_color_row_col(2, 4, 15, 208, 255);
-  set_color_row_col(3, 3, 15, 208, 255);
-  set_color_row_col(3, 4, 15, 208, 255);
-
-  set_color_row_col(8, 2, 15, 208, 255);
-  set_color_row_col(8, 3, 15, 208, 255);
-  set_color_row_col(8, 4, 15, 208, 255);
-
-  // Go back
-  set_color_row_col(8, 6, 168, 16, 255);
-}
-
 bool rgb_matrix_indicators_user(void)
 {
-  switch (get_highest_layer(default_layer_state | layer_state)) {
-  case FUNCTION:
-    set_fn_colors();
-    break;
-  case SYMBOL:
-    set_symb_colors();
-    break;
+  layer_state_t highest_layer = get_highest_layer(layer_state);
+  if (highest_layer > BASE) {
+    for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
+      for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
+        uint8_t index = g_led_config.matrix_co[row][col];
+        switch (keymaps[highest_layer][row][col]) {
+        case KC_TRANSPARENT:
+          if (IS_QK_ONE_SHOT_LAYER(keymaps[BASE][row][col])) {
+            rgb_matrix_set_color(index, MY_RGB_PURPLE);
+          } else {
+            rgb_matrix_set_color(index, RGB_OFF);
+          }
+          break;
+        case KC_MEDIA_NEXT_TRACK ... KC_MEDIA_PLAY_PAUSE:
+          rgb_matrix_set_color(index, RGB_WHITE);
+          break;
+        case DB_TOGG:
+        case QK_DYNAMIC_TAPPING_TERM_PRINT ... QK_DYNAMIC_TAPPING_TERM_DOWN:
+          rgb_matrix_set_color(index, MY_RGB_PURPLE);
+          break;
+        default:  // assume the rest are symbols
+          rgb_matrix_set_color(index, MY_RGB_CYAN);
+        }
+      }
+    }
   }
-  return true;
+  return false;
 }
 
 void keyboard_post_init_user(void)
