@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         DV_GRV,   DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    KC_BRID,          KC_VOLD,   DV_F,    DV_G,    DV_C,    DV_R,    DV_L,     DV_SLSH,
         KC_CAPS,
         //  ^ assume that os mapping sees this as an escape
-                  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    KC_RALT,          KC_RALT,   DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     OSL(SYMBOL),
+                  DV_A,    DV_O,    DV_E,    DV_U,    DV_I,    KC_NO,            KC_NO,     DV_D,    DV_H,    DV_T,    DV_N,    DV_S,     OSL(SYMBOL),
         KC_LSFT,  DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,                                 DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,     KC_RSFT,
         _______,  KC_LSFT, KC_LCTL, LALT_T(KC_DOWN),
                                              LGUI_T(KC_UP),    KC_RALT,          KC_RALT,            RGUI_T(KC_LEFT),
